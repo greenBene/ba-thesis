@@ -163,7 +163,7 @@
 %\renewcommand\cfttoctitlefont{\LARGE\bfseries}
 
 %%%%%%%%%% Referenzen %%%%%%%%%%%
-\usepackage[style=numeric, bibencoding=utf8, backend=biber, sorting=nty, maxbibnames=15]{biblatex}% für bibliographie, style=authortitle/numeric/ieee, backend=biber/bibtex/bibtex8, bibencoding=ascii/utf8
+\usepackage[style=numeric, bibencoding=utf8, backend=biber, sorting=none, maxbibnames=15]{biblatex}% für bibliographie, style=authortitle/numeric/ieee, backend=biber/bibtex/bibtex8, bibencoding=ascii/utf8
 \usepackage{silence}% Filter warnings issued by package biblatex starting with "Patching footnotes failed"
 \WarningFilter{biblatex}{Patching footnotes failed}
 
@@ -300,6 +300,7 @@
 	extendedchars=true,% for 8-bits encodings only,
     % does not work with UTF-8
 }
+
 
 %%%%%%%%%%%%%% Environments %%%%%%%%%%%%%%
 \newenvironment{abstractDE}{%

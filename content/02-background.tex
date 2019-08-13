@@ -1,27 +1,81 @@
 \chapter{Background}
 
-What happens in this chapter?
-
 \section{Definitions}
 
-\begin{itemize}
-\item terms that need to be understood for understanding this thesis exposé
-\end{itemize}
+The first section, \textit{Definitions}, defines terms regarding trajectory analysis which are not commonly known and necessary for understanding the Bachelor thesis. 
+
+\textbf{Spatial Trajectory} A spatial trajectory is a trace of an object through a geographical space  \cite{Zheng:2015:TDM:2764959.2743025}. It is usually represented as a chronologically ordered list of points $ P = p_1\rightarrow p_2 \rightarrow \dots \rightarrow p_n$. The points consist of a geospatial coordinate set, and a timestamp $p_i=(lat,lon,t)$.
+
+\textbf{Semantic Trajectory} A semantic trajectory is defined as a finite spatial trajectory with a semantic meaning, i.e. the used transportation mode $((p_1\rightarrow p_2 \rightarrow \dots \rightarrow p_n), label)$ \cite{Zheng:2015:TDM:2764959.2743025}.
+
+\textbf{Trajectory Segmentation} In trajectory segmentation, a trajectory is divided into fragments by a measure such as time, spatial shape, or semantic meaning \cite{Zheng:2015:TDM:2764959.2743025}. These fragments can be used for further processing such as classification.
+
+\textbf{Trajectory Classification} The process of predicting the class label of trajectories, or their segments, based on their features is called trajectory classification \cite{lee2008traclass}.
+
+\textbf{Stay Point} A stay point $s$ is defined as a geographical region in which a user stays over a threshold time $T_r$ within a threshold distance $D_r$ \cite{Zheng2007}. In a spatial trajectory, a stay point $s$ is characterised by a set of consecutive points $P=p_m \rightarrow p_{m+1} \rightarrow \dots \rightarrow p_n$ with $\forall m<i\leq n:\: Dist(p_m, p_i) \leq D_r$, $Dist(p_m, p_{n+1}) > D_r $, and $p_n.t - p_m.t \geq T_r$. The stay point $s$ is then defined by $s=(x, y, t_a, t_l)$ where $s.lat = \sum^{n}_{i=m}p_i.lat /|P|$, $s.lon = \sum^{n}_{i=m}p_i.lon /|P|$, $s.t_a = p_m.t$, and $s.t_l = p_n.t$.
+
+\textbf{Segment} A segment is defined as the edge between any two consecutive points in a spatial trajectory \cite{Zheng:2015:TDM:2764959.2743025}. In a spatial trajectory $P=p_1 \rightarrow \dots \rightarrow p_n$, each edge $p_i\rightarrow p_{i+1}, 1\leq i < n$ is called a segment.
+
+\textbf{Trip} A trip $T_i$ is defined as the subset of a spatial trajectory between two consecutive stay points \cite{Zheng2008}. $T_i = \{p \in P |\: s_i.t \leq p.t \leq s_{i+1}.t \}$, where $T_i$ is the set of all spatial trajectories of a trip, $P$ is the set off all recorded spatial trajectories of a user, and $s_i, s_{i+1}$ are two consecutive stay points of the user. 
+
+\textbf{Stage} A stage is a group of successive segments of the same transportation mode within a trip \cite{Bolbol2012}. A new stage starts where the transportation mode changes to another, or where the used vehicle is changed.
+
+\textbf{Change Point} A change point is defined as the location where a person changes their mode of transportation within a trip \cite{Zheng2008}.
+
+\section{Methodology}
+
+
+
+\section{Related Systems}
+The third section, \textit{Related Systems}, is a short survey on existing systems for iOS, which determine the parking pposition of a users car.
+
+
+Apple Maps \cite{apple:maps}, which is preinstalled on iOS devices, supports determining the parking position of a car on an iPhone naively.  The parking position is determined via the phones connection to the car \cite{apple:maps:parkedcar}. When the Bluetooth connection or the CarPlay connection, a proprietary way to connect some cars with an iPhone, stops, the phone logs the current position as the parking position of the car. The user can then manually change and optimise the logged position and also can add a photo to the saved location to make the car even easier to find.
+The approach used by Apple Maps is very convenient for users which connect their phone to their car regularly as the battery consumption is low. It is not useful for users which either do not or cannot connect their phone to their car as there is no alternative solution for them in Apple Maps. It is interesting to note, that on Google Maps for /android/, Googles own mobile operating system, no automatic parking detection is implemented and the user has to manually set their location as the parking position.
+
+Google Maps \cite{google:maps:app} also offers a feature to determine the parking position of a users car on an iPhone. Three different approaches are implemented \cite{google:maps:app:parkedcar}. First,  the app can determine the parking position automatically via the \textit{Motion and Fitness Activity} data of the user. How exactly it uses the data is not mentioned. The mentioned \textit{Motion and Fitness Activity} data include data from the iPhone`s accelerometer, gyroscope and magnetometer. The second approach is, like Apple Maps, based on the phones connection to the users car. The third approach is to let the user manually set the parking location. For this, the user has to tap their location on the map view and can choose to set the current position as parking location. 
+As Google Maps does not rely solely on the direct connection of the phone to the car, it is useful to any user, independent from the users willingness or possibility to connect their phone to their car.  A possible disadvantage of the Google Maps app is privacy as it does not claim to process the users data only on the device itself and does not publicise how the approach based on \textit{Motion and Fitness Activity} data actually is implemented.
+
+In the Apple AppStore are several applications which are dedicated for finding the parked car of the user. Most of them, like \textit{Find my Parked Car} \cite{miron:app}, \textit{Find My Car - Car Locator} \cite{babbar:app} or \textit{Find My Car - GPS Auto Parking Reminder \& Tracker} \cite{donner:app} approach the determination of the users car by relying on input by the user. Some applications, like \textit{ParKing P} \cite{porat:app} also offer an approach based on the Bluetooth connection of the phone to the car. 
+
+Several applications from a variety of developers exist to support users in finding their parked car. The most used navigation systems on iOS, Google Maps and Apple Maps, have this functionality build in. For determining the parking position, most apps rely on either direct user input or on a connection of the phone to the car. Only Google Maps uses some kind of movement data, the \textit{Motion and Fitness Activity} data, to determine the parking position of a car.To the best of the knowledge of the author, no application exists on the Apple AppStore, which determines the parking position of a car based on the spatial trajectories of a user.
+
 
 \section{Related Work}
+The fourth section, \textit{Related Work}, discusses academic work related to the Bachelor thesis. The focus is on transportation mode classification based on spatial trajectories, as this is the base of the parking position determination approach of the thesis. No work related to the determination of the parking position of a car based on spatial trajectories is discussed as, to the best of the knowledge of the author, no academic work covered this subject before. Academic work related to User Centered Design is discussed, as the Bachelor thesis uses an analysis method based on User Centered Design. 
 
-\begin{itemize}
-\item arrange your work into the context of other scientific work
-\begin{itemize}
-  \item Which academic papers exist in your problem area?
-  \item How are they related to your work?
-\end{itemize}
-\item How is a found source written down?
-\begin{itemize}
-\item name of the author (bold)
-\item title of the source (italic)
-\item short summary of the relevant content
-\item citation marker
-\item How is this work related to your work?
-\end{itemize}
-\end{itemize}
+The paper \textit{Trajectory Data Mining: An Overview} \cite{Zheng:2015:TDM:2764959.2743025} is a survey on the field of trajectory data mining. It presents a categorisation of trajectory data mining, explains each category briefly and lists existing research of each category.\newline
+The paper explains the high level concepts of trajectory data mining, including \textit{stay-point detection}, \textit{trajectory segmentation} and \textit{trajectory classification} , which are used in the thesis to classify the transportation mode of a users spatial trajectories. It is also referred to as a source for several definitions, such as \textit{spatial trajectory}, \textit{trajectory segmentation},  and \textit{segments}.
+
+The paper \textit{Transportation mode detection – an in-depth review of applicability and reliability} \cite{Prelipcean2017} is a survey of approaches for transportation mode detection. It introduces a classification of three classes and lists some of the most influential academic works for each class. The first class, \textit{Location-based Services} (LBS),focuses the real time classification of a transportation mode and is mostly used for systems which provides direct feedback to the users. The second class, \textit{Transportation Science} (TSc), focuses on travel patterns of one or more individuals. Thus the data does nott need to be processed in real time and can take more context into account. The third class, \textit{Human Geography} (HG), focuses on enriching trajectories with more semantics meaning, such as the information if a boat is fishing.\newline
+The Bachelor thesis is to be understood as between LBS and HG as it aims to provide the parking position of a car, which is additional semantic meaning, in n
+
+The paper \textit{Learning Transportation Mode from Raw GPS Data for Geographic Applications on the Web} \cite{Zheng2008} presents an approach to infer the transportation mode only from GPS trajectories. For this, the authors first segment a spatial trajectory into trips. Next, the individual trips are segmented into Walk Segments and non-Walk Segments based on the average speed. The non-Walk segments are then classified into different transportation methods: car, bus, and bike. In the last step, the probabilities of the transportation methods are adjusted based on the transportation mode of the previous segment. \newline
+The Bachelor thesis relies for the determination of the parking position of a car on the transportation mode classification of the users spatial trajectory. This paper is one of the first academic works about the transport mode classification based on the spatial trajectories of a user and thus build the base of most further research in this domain.
+
+The paper \textit{Understanding mobility based on GPS data} \cite{zheng2008understanding} is a direct continuation of the authors`s previous work \cite{Zheng2008}. It improves the features and the post-processing process. The newly introduced features are \textit{heading change rate}, \textit{velocity change rate} and \textit{stop rate}. The improved post-processing process segments the likelihood for a transportation mode into three categories and optimises the results based on the assigned category. \newline
+The newly introduced features are not applicable to the chosen approach in the Bachelor thesis, as they assume a pre-segmentation into stages, before the stages are classified. The improved post-processing of the likelihood is taken into consideration if the accuracy of the XGBoost floating window model shows to not be sufficient. 
+
+The paper \textit{Identifying Different Transportation Modes from Trajectory Data Using Tree-Based Ensemble Classifiers} \cite{Xiao2017} classifies the transportation mode of a spatial trajectory based on tree-based ensemble methods. It does not rely on a pre-segmentation into Walk and non-Walk segments. The used tree ensemble based machine learning models, such as Random Forest, Gradient Boosting Decision Tree, and XGBoost show better performance than the best models of previous works, such as in \cite{Zheng2008}. The authors present 111 different features to extract from trajectory segments and reach a maximum recall of over 90\%. A limitation of the paper is the missing approach to segment unlabelled trajectories into stages which then can be classified. In the paper it is assumed that the data is available in pre-segmented stages.\newline
+The paper can be understood as a continuation of the work described in \cite{Zheng2008} with more modern machine learning models and more exhaustive features. The Bachelor thesis uses the machine learning model XGBoost \cite{chen2016xgboost}, which has the best performance reported in the paper and also adapts the most important features shown in the paper, which are applicable to the used approach.
+
+In \textit{Inferring hybrid transportation modes from sparse GPS data using a moving window SVM classification} \cite{Bolbol2012} the transportation mode of spatial trajectories is classified by using a floating window approach. The transportation mode of fixed size floating sets of consecutive segments is classified. Based on these classifications stages are defined. Only \textit{speed} and \textit{acceleration} are used as features as they are the most discriminatory. The paper introduces the idea of sparse datasets to reduce computation costs and to save battery power on the trajectory generating device. It is concluded that 30 to 60 second intervals seem to be sufficient.\newline
+The paper is highly influential to the Bachelor thesis. First, the floating window approach is used to avoid relying on heuristics to segment trips into segments of the same transportation mode. Second, the idea of sparse datasets is taken into account as the trajectory generating and classification device, the Smartphone, has a limited battery. 
+
+The paper \textit{Trajectory Classification Using Hierarchical Region-Based and Trajectory-Based Clustering} \cite{lee2008traclass} presents a framework to generate features for the classification of spatial trajectories. The frameworks distinguishes between \textit{region-based} and \textit{trajectory-based} features.  \newline
+The results of this paper are only partly adaptable for the Bachelor thesis, as the trajectory classification in the thesis will solely focus on \textit{trajectory-based} features. \textit{Region-based} features are avoided to ensure the independence of the transportation mode classification from the location where the spatial trajectories are generated.
+
+The paper \textit{GeoLife: A Collaborative Social Networking Service among User, Location and Trajectory} \cite{zheng2010geolife} presents the social networking service \textit{GeoLife} by Microsoft Asia. It is used to generate spatial trajectories of several people over a long  period of time. The goal of the project ist to better understand \textit{trajectories}, \textit{users} and \textit{locations}. One of the aspects of the \textit{trajectory understanding} is the transportation mode classification.
+The data from this project is used in the Bachelor thesis to train the machine learning model which classifies the transportation mode of a users trajectory segments.
+
+The dataset \textit{GPS Trajectories with transportation mode labels} \cite{geolife-dataset}\cite{zheng2009mining}\cite{zheng2008understanding}\cite{zheng2010geolife} contains GPS trajectories collected for the GeoLife project from Microsoft Research Asia. Some of the trajectories are labelled with the used transportation method. 91 \% of the reported trajectories consist of relatively dense points, which are reported every 2-5 seconds or 5-10 meters. The data is created by 182 users over three years. 69 of the users labeled their trajectories with the used transportation mode. \newline
+The dataset is used to train a machine learning model, which classifies the transportation modes of the non-walk segments on a trip. Based on the change points and the transportation modes of the adjacent trip segments, the parking position of the drivers car is determined. 
+
+
+The paper \textit{Using mobile phones to determine transportation modes} \cite{Reddy2010} describes the design and implementation of a mobile phone based transportation mode classification system, which uses spatial trajectories and acceleration data. It discusses the implications of the limitations introduced by the mobile phone. Especially, the battery and processor impact are discussed.
+The paper is understood as an orientation for the discussion of the limitations introduced by the mobile phone. The specific results of the paper regarding the processor usage and the battery impact cannot be compared to the results of the thesis, as the hardware changed drastically since the publication of the paper in 2010.
+
+The paper \textit{Inferring transportation modes from GPS trajectories using a convolutional neural network} \cite{Dabiri2018} discusses a convolutional neural network approach to classify the transportation mode of spatial trajectories. It is argued that this approach avoids the manual creation of high level features which are error prone and nor exhaustive. They reach an accuracy of 84.8\%.\newline
+The paper describes in detail the pre-processing steps of the training data for the machine learning model. They introduce a limit for the average acceleration and speed of a stage for each transportation mode to filter wrongly labeled data. The used values are the basis of a pre-processing step in the Bachelor thesis.
+
+The presented papers give an overview of the research in the field of transport mode classification of spatial trajectories. Earlier papers rely on relatively simple machine learning approaches, such as Decision Trees \cite{Zheng2008}, while recent papers use more complex systems, such as XGBoost \cite{Xiao2017} or convulated neural networks \cite{Dabiri2018}. Most research reaches an accuracy between 80\% and 95\%.  
