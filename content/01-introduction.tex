@@ -1,9 +1,34 @@
 \chapter{Introduction}
 
-What happens in this chapter? 
+The first section, \textit{Introduction}, introduces the domain of parking spaces, explains why it is useful to find a parked car in a short period of time and summarises the contribution of this Bachelor thesis for finding a parked car based on trajectory analysis.
+The first part, \textit{Motivation}, explains the problem of overused parking spaces in major cities. It shows why it can be difficult to find a parked car and how the period of time a driver needs to find their parked car affects the number of unoccupied parking spaces.
+The second part, \textit{Outline of Contribution}, summarises the contribution of the Bachelor thesis and the functionality of the developed application, which supports the drivers in finding their parked car. 
+The fourth part, \textit{Structure of Thesis}, describes the structure of the Bachelor thesis.
 
 \section{Motivation}
+% introduce the domain
+
+Finding an unoccupied parking space in a major city is becoming more difficult as the number of private vehicles increases and the available land for parking spaces is not efficiently used. It is estimated that 30\% of driving vehicles in cities are searching for a parking space. A decrease in parking time would lead to more available parking spaces, as the parking spaces would be less in unnecessary use and thus would be earlier available again. \cite{wu2007robust} \cite{Ibrahim2018} \cite{Geng2012}
+
+% introduce the problem 
+Drivers are more conscious about the appointment they are heading to than the exact location where they park. The frustration caused by the difficulty to find an unoccupied parking space increases this effect. Hence, it can be time-consuming to find the position where the car is parked after the appointment. Parking spaces are longer occupied than necessary.
+
+% give an easy example
+\textit{\textbf{Example 1}
+Alexandra Smith has been invited for a job interview at Boho Technologies. The public transport in the village she lives in is not good, so she decides to go to the interview by car. Half an hour before the appointment she drives around in the area of the company and looks for a parking space. After 10 minutes she finds one in a small street. She parks there and makes it just in time to the job interview. After the successful appointment, she cannot remember where her car is parked. She needs more than 30 minutes to find it. When she finds it, she sees an 80£ fine on her car because she stayed longer than allowed on the parking space.
+}
+
+As \textit{Example 1} shows it is challenging to find a parked car in a major city. This leads to frustrated drivers and the parking spaces are longer occupied than necessary. A system to support the drivers at finding their cars is needed to help reducing the unnecessary utilisation of highly needed parking spaces in major cities.
 
 \section{Outline of Contribution}
 
-\section{Structure of the Thesis}
+% Artefact
+In the Bachelor thesis an iPhone application is developed, which supports car drivers locating the position of their parked car. The application uses spatial trajectories, based on the Global Positioning System (GPS), to model each trip of the driver to determine the parking position of the car. The application shows the location of the parked car and the location of the user on a map. All calculations involving the spatial trajectories of the users are done on the mobile device to ensure privacy.
+
+% Method
+To enable the application to predict the parking position of a car, a machine learning-based system is developed. The spatial trajectories are split into trips on the stay points of the user. Segments of the trips are classified with their transportation method based on a sliding window by a machine learning model. This model is trained on labelled spatial trajectory data. \cite{zheng2010geolife}
+
+\section{Structure of Thesis}
+The fourth part, \textit{Structure of Thesis}, describes the structure of the Bachelor thesis by introducing each chapter with its function in the thesis.
+
+In chapter 2, \textit{Background}, defines terms necessary to understand the Bachelor thesis, explains the used methodology for analysing the problem, defining requirements and ensuring the usability of the developed application.

@@ -1,1 +1,102 @@
 \chapter{Analysis}
+In chapter 2, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of potential users of the application, which determines the parking position of a car. Based on the results and the limitations of the Bachelor thesis, requirements are defined for the application.
+In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations, users have for the developed application.
+In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the interviews and the limitations of the Bachelor thesis.
+
+\section{Background Interviews}
+In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations of  users of the developed application. It is argued, who the potential target audience is. To uniquely identify the questions of the interviews, a nomenclature is introduced. The answers of the participants to each question are summarised.
+
+To identify the needs and expectations of users, potential users are interviewed for \textit{background interviews}. The \textit{background interviews} are \textit{semi structured}. All people who drive cars are potential users of the application. Because the application solves a specific problem which is applicable to most drivers, the target audience is not segmented into smaller groups. Four people are interviewed who are part of the target audience. The interviewed people are called participants. All participants volunteer for the interview without any extrinsic incentive, and agree to be recorded and quoted anonymously. \cite{Abras2004} \cite{wilson2013interview}
+
+To clearly identify the questions, a nomenclature is introduced. The nomenclature term is limited by squared brackets. The term consists of a capital \textit{Q}, a \textit{dot} and a \textit{positive integer}. The \textit{Q} indicates that the nomenclature is used for questions. The \textit{dot} indicates that the following number implies the number of the referred question. The \textit{positive integer} uniquely defines the referred question. An example for the nomenclature of the questions is [Q.1].
+
+    
+\paragraph{[Q.1] In which situations in your past could you not find your parked car?}
+The two most mentioned locations where users have troubled finding their car are \textit{big parking lots}, mentioned by three of the four participants, and \textit{multi-storey parking lots}, mentioned by two of the four participants.
+
+\paragraph{[Q.2] Imagine you cannot remember where exactly you parked your car. Could you describe how you would approach finding your car?}
+When asked to describe their approach on finding their parked car if the exact location is not known, three out of four participants say they would walk around the area where the car should be. Two of four would use the remote key of the car to unlock and lock the car to create visual and auditory feedback to indicate if the car is near by.
+
+\paragraph{[Q.3] Please list the two or three features which are most important for you in an application, which helps you to find your parked car.}
+The two most important aspects of the application, each mentioned by two of the four participants, are the \textit{accuracy} of the determined parking position and the \textit{functionality of the application without user input}.
+
+\paragraph{[Q.4] How accurate to you expect the application to be?}
+All of the participants express that an accuracy of 10 meters is sufficient for the determined parking position. Only two of four participants express than an accuracy of 50 meters is sufficient.
+
+\paragraph{[Q.5] Which information should the application present to you?}
+All participants expect the application to show the position of their parked car. Two out of four participants also expect to see their current position and the position of their parked car on a map. 
+
+\paragraph{[Q.6] What would prevent you from using the application?}
+Required manual user input or a complicated user interface would each prevent two of four participants to use the application. A lack of clarity about the use of the generated user data and bad reviews in the AppStore would each prevent one participant to use the application.
+
+\paragraph{[Q.7] How do you feel about the application using your location data?}
+For three of the four participants the use of the location data is not an issue. The remaining participant accepts the usage of their location data, if the application is open about the use of the generated data. 
+
+\paragraph{[Q.8] Would it be reassuring for you to that no location data is send to the cloud? }
+All participant would find it reassuring if the location data is only used on the device itself, but for none of participants it a requirement. They would also use the application, if the data is uploaded and processed online. 
+
+\paragraph{[Q.9] Since when do you drive cars?}
+Two of the participants drive cars since 8 years. The other two participants drive since 6 and 8 years. 
+
+\paragraph{[Q.10] How regularly do you drive cars?}
+Three of four participants drive currently only a few times a year by car. One participant drives weekly. Two of four mention they used to drive daily by car. The other two participants mention they used to drive by car monthly or weekly. 
+
+\paragraph{[Q.11] How old are you?}
+Two of the participants are 26 years old. The other two participants are 28 and 32 years old.
+
+\paragraph{[Q.12] Did you use apps which help you to find your car before?}
+Only one of the four participants previously used an application to help them find their car before. This person used Google Maps.
+
+\paragraph{[Q.13] Are you aware that Google Maps and Apple Maps offer a feature to help finding a parked car?}
+Only one of the participants is aware, that Google Maps and Apple Maps provide the functionality to assist in finding a users parked car. 
+
+\paragraph{[Q.14] Do you drive more often in cities or rural areas? A city is defined as a town with a population greater than 100.000 people.}
+Two of the participant report that they drive most often in urban areas. The other two either drive in rural and urban areas equally or primarily in rural areas.
+
+%Four participants are interviewed about their needs and expectation of an application to support users to find their parked car. For the asked questions, an nomenclature is introduced. The answers to each question are summarised. 
+
+\section{Requirements}
+In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the \textit{background interviews} and the limitations of the Bachelor thesis. To uniquely identify the requirements, a nomenclature is introduced. The requirements are split into functional and non-functional requirements. A \textit{functional requirement} ''specifies a function that a system or system component must be able to perform.'' \cite{eide2005quantification}. A \textit{non-functional requirement} is defined as a requirement which is not an \textit{functional requirements}, such as \textit{data requirements, constraints and quality requirements}. \cite{eide2005quantification}
+
+% define and explain nomenclature
+To uniquely identify the requirements, a nomenclature is introduced. The nomenclature term is limited by squared brackets. The term consist of \textit{two letters}, one \textit{dot}, and one \textit{positive integer}. The two letters can be either \textit{RF} or \textit{RN}. \textit{RF} indicates that the requirement is a \textit{functional requirement}. \textit{RN} indicates that the requirement is a \textit{non-functional requirement}. The \textit{dot} separates the two letters from the positive integer. The \textit{positive integer} indicates the number of the requirement in its requirements type. An example for the nomenclature of the questions is [RF.1].
+
+
+\subsection{Functional Requirements}
+
+\paragraph{[RF.1] The application determines the parking position of a car}
+The contribution of the Bachelor thesis is to develop an application to determine the parking position of a car. Thus, determining the parking position of a car is defined as a requirement of the application.
+
+\paragraph{[RF.2] The user interface shows the position of the parked car on a map}
+In [Q.5], all participants report that they expect to see the position of the car in the application. Two out of four specify they expect to see the position of the car on a map. Thus, showing the position of the parked car on a map is defined as a requirement for the application. 
+
+\paragraph{[RF.3] The user interface shows the current position of the user on a map}
+In [Q.5], two out of four participants express their expectation to see also their current position on a map. This helps the user to orientate and find their car more easily. Thus, showing the current position of the users on a map is defined as a requirement for the application.
+
+\paragraph{[RF.4] If the car is parked in a multi-storey parking lot, the application indicates the level of the car}
+In [Q.1], two out of four participants report they could not find their can on a \textit{multi-storey parking lot}. To be helpful in the context of such a parking lot, the application needs to indicate the level on which the car is parked. Otherwise, the user has to look for their car on multiple levels. Thus, indicating the level of the car if it is parked on a multi-storey parking lot is defined as a requirement for the application.
+
+\subsection{Non-functional Requirements}
+
+\paragraph{[RN.1] The application uses the spatial trajectory analysis of the user to determine the parking position of the users car.}
+Two of four participants express, that the need of direct user input would prevent them from using the application.To achieve this, the Bachelor thesis limits itself to use spatial trajectory analysis to determine the parking position of a car. Thus, determining the the parking position of a car by \textit{spatial trajectory analysis} is defined as a requirement of the application.
+
+\paragraph{[RN.2] The application is developed for iOS 12}
+The Bachelor thesis limits itself to develop an application which runs on an iPhone by Apple. The application is developed to run on the most recent stable operating system for iPhone's, iOS 12. Thus, is defined as a requirement of the application that it runs on iOS 12.
+
+\paragraph{[RN.3] The determined parking position does not diverge more than 50 meters of the actual parking position of the car}
+Two of four participants name in [Q.3] the accuracy of the determined parking position as one of their most important aspects of the application. In [Q.4], all participants express that an accuracy of 10 meters is sufficient. Only two out of four think, an accuracy of 50 meters is sufficient. Thus, it is defined as a requirement that the determined parking position of the car does not diverge more than 50 meters of the actual parking position of the car.
+
+
+\paragraph{[RN.4] The application has an easy to use user interface}
+In [Q.6], half of the participants report that an complicated user interface would prevent them from using the application. Thus, an easy to use user interface is defined as a requirement for the application.
+
+\paragraph{[RN.5] The application can determine the parking position of a car on a parking lot.}
+In [Q.5], half of the participants express that they had issues finding their parked car on a parking lot. Thus, is defined as a requirement of the application that the application can determine the parking position of a car on a parking lot
+
+
+\paragraph{[RN.6] The application can determine the position of the users ca in a multi-storey parking lot.}
+In [Q.5], two of four participants report having problems finding their parked car on a \textit{multi-storey parking lot}. Thus, the application is required to help the user find their parked car in a multi-storey parking lot. 
+
+
+
