@@ -1,7 +1,7 @@
 \chapter{Analysis}
-In the second chapter, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of potential users of the application, which determines the parking position of a car. Based on the results and the limitations of the Bachelor thesis, requirements are defined for the application.
+In the second chapter, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of potential users of the application, which determines the parking position of a car. Based on the results of the interviews and the constraints of the Bachelor thesis, requirements are defined for the application.
 In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations, users have for the developed application.
-In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the interviews and the limitations of the Bachelor thesis.
+In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the background interviews and the constraints of the Bachelor thesis.
 
 \section{Background Interviews}
 In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations of  users of the developed application. It is argued, who the potential target audience is. To uniquely identify the questions of the interviews, a nomenclature is introduced. The answers of the participants to each question are summarised.
@@ -51,45 +51,46 @@ Two of the participant report that they drive most often in urban areas. The oth
 
 
 \section{Requirements}
-In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the \textit{Background Interviews} and the limitations of the Bachelor thesis. The requirements are split into functional and non-functional requirements. A functional requirement ''specifies a function that a system or system component must be able to perform.''. A non-functional requirement is defined as a requirement which is not an functional requirements, such as data requirements, constraints and quality requirements. \cite{eide2005quantification}
+In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the \textit{Background Interviews} and the constraints of the Bachelor thesis. The requirements are split into functional and non-functional requirements. A functional requirement ''specifies a function that a system or system component must be able to perform.''. A non-functional requirement is defined as a requirement which is not an functional requirements, such as data requirements, constraints and quality requirements. \cite{eide2005quantification}
 
 The requirements are uniquely identified with [XX.yy], where XX can eiter be RF and mean functional requirement, or be RN and mean non-functional requirement, yy is a number starting at 01 and the point separates the letters from the number. The brackets ''[]'' limit the term.  
 
 \subsection{Functional Requirements}
 
-\paragraph{[RF.1] The application determines the parking position of a car}
-The contribution of the Bachelor thesis is to develop an application to determine the parking position of a car. Thus, determining the parking position of a car is defined as a requirement of the application.
+\paragraph{[RF.01] The application determines the parking position of the users car using spatial analysis}
+The parking position is determined by analysing the spatial trajectories of the users. The spatial trajectory, based on the GPS sensor of the phone, is segmented and classified into the used transportation mode of the user and a heurisic is used to determine the parking position based on this segmentation. The requriement is based on the constraints of the Bachelor Thesis. 
 
-\paragraph{[RF.2] The user interface shows the position of the parked car on a map}
-In [Q.5], all participants report that they expect to see the position of the car in the application. Two out of four specify they expect to see the position of the car on a map. Thus, showing the position of the parked car on a map is defined as a requirement for the application. 
+\paragraph{[RF.02] The applicaton presents the determined parking position of the users car on a map}
+The parking position of the users car is presented on a map to enable the user to easily orientate themself in the environment. The requirement is based on the users answers to [Q.05].
 
-\paragraph{[RF.3] The user interface shows the current position of the user on a map}
-In [Q.5], two out of four participants express their expectation to see also their current position on a map. This helps the user to orientate and find their car more easily. Thus, showing the current position of the users on a map is defined as a requirement for the application.
+\paragraph{[RF.03] The application presents the current position of the user on a map}
+The current user location is presented on a map to enable the user to orient themself in their current environment. Thus, the heading of the user is also indicated. The requirement is based on the users answers to [Q.05].
 
-\paragraph{[RF.4] If the car is parked in a multi-storey parking lot, the application indicates the level of the car}
-In [Q.1], two out of four participants report they could not find their can on a multi-storey parking lot. To be helpful in the context of such a parking lot, the application needs to indicate the level on which the car is parked. Otherwise, the user has to look for their car on multiple levels. Thus, indicating the level of the car if it is parked on a multi-storey parking lot is defined as a requirement for the application.
+\paragraph{[RF.04] The application presents detailed information about the determined parking position, namely the address, the distance from the current location and the relative altitude}
+The detailed information of the determined parking location are presented to the user to enable them to find the most fitting way to find to their parked car. With the address, the distance and the relative altitide they can determine if they can walk to the location or need to use a taxi or public transportation. The requirement is based on the users answers in the \textit{Background Interviews} in [Q.05].
+
+\paragraph{[RF.05] The applications enables the user to report the accuracy of the determined parking position to the developer}
+To enable the user to report the accuracy of the determined parking position, a view is implemented to support the user in reporting the accuracy. The accuracy is defined as the distance between the determined parking position of the users car and the actual parking position. This requirement is necessary to enable the quantitative evaluation of the parking positon accuracy. 
 
 \subsection{Non-functional Requirements}
 
-\paragraph{[RN.1] The application uses the spatial trajectory analysis of the user to determine the parking position of the users car.}
-Two of four participants express, that the need of direct user input would prevent them from using the application.To achieve this, the Bachelor thesis limits itself to use spatial trajectory analysis to determine the parking position of a car. Thus, determining the the parking position of a car by spatial trajectory analysis is defined as a requirement of the application.
+\paragraph{[RN.01] The application is easy to use}
+The applications user interface does not confuse the user and presents all options in an easy to understand way. The user is always aware of the state of the application. This requirement is based on the users answers to [Q.06].
 
-\paragraph{[RN.2] The application is developed for iOS 12}
-The Bachelor thesis limits itself to develop an application which runs on an iPhone by Apple. The application is developed to run on the most recent stable operating system for iPhone's, iOS 12. Thus, is defined as a requirement of the application that it runs on iOS 12.
+\paragraph{[RN.02] The application does not send any location data to server components of the implemented system}
+To ensure the privacy of the users and to avoid collectinf sensible information, the app does not send any location data to any server component of the implemented system. The requirement is based on the users answers to [Q.08].
 
-\paragraph{[RN.3] The determined parking position does not diverge more than 50 meters of the actual parking position of the car}
-Two of four participants name in [Q.3] the accuracy of the determined parking position as one of their most important aspects of the application. In [Q.4], all participants express that an accuracy of 10 meters is sufficient. Only two out of four think, an accuracy of 50 meters is sufficient. Thus, it is defined as a requirement that the determined parking position of the car does not diverge more than 50 meters of the actual parking position of the car.
+\paragraph{[RN.03] The applicaton does not rely on manual user input for determining the parking position}
+The application can determine the parking position of the users car without the user needing to manually input any data, such as the parking position or the used transportation mode. The process to determine the parking position is fully automated. The requirement is necessary because of several users reporting in [Q.06] that manual user input would prevent them from using the application.
 
+\paragraph{[RN.04] The accuracy of the determined parking position is better than 50 meters}
+The accuracy, defined as the distance between the determined parking position of the users car and its actual parking position, is better than 50 meters. Users report the accuracy as one of the most important features of the application in [Q.03] and the majority agrees that an accuracy of better than 50 meters is sufficient in [Q.04]. 
 
-\paragraph{[RN.4] The application has an easy to use user interface}
-In [Q.6], half of the participants report that an complicated user interface would prevent them from using the application. Thus, an easy to use user interface is defined as a requirement for the application.
+\paragraph{[RN.05] The application is developed to run on iOS 12}
+The application is developed to run on iPhones with the latest iPhone operating system iOS 12. The requirement is based on the constraints of the Bachelor thesis. 
 
-\paragraph{[RN.5] The application can determine the parking position of a car on a parking lot.}
-In [Q.5], half of the participants express that they had issues finding their parked car on a parking lot. Thus, is defined as a requirement of the application that the application can determine the parking position of a car on a parking lot
+\paragraph{[Rn.07] The application is functional on big parking lots}
+One of the most named location in [Q.01] where users had problems finding their parked car are big parking lots, such as infront of major supermarkets brands or furniture stores. Thus, the application needs to support the user in finding their parked car in this locations.
 
-
-\paragraph{[RN.6] The application can determine the position of the users ca in a multi-storey parking lot.}
-In [Q.5], two of four participants report having problems finding their parked car on a multi-storey parking lot. Thus, the application is required to help the user find their parked car in a multi-storey parking lot. 
-
-
-
+\paragraph{[Rn.08] The application is functional on multi-storey parking lots}
+The other most named lcoation in [Q.01] where users had problems finding their parked car are multi-storey parking lots. Thus, the application needs to support the user in finding their parked car in this locations by providing data to determine the floor on which the car is parked. 
