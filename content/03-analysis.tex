@@ -6,19 +6,21 @@ In the second section, \textit{Requirements}, the requirements of the applicatio
 \section{Background Interviews}
 In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations of  users of the developed application. It is argued, who the potential target audience is. To uniquely identify the questions of the interviews, a nomenclature is introduced. The answers of the participants to each question are summarised.
 
-To identify the needs and expectations of users, potential users are interviewed for \textit{background interviews}. The \textit{background interviews} are \textit{semi structured}. All people who drive cars are potential users of the application. Because the application solves a specific problem which is applicable to most drivers, the target audience is not segmented into smaller groups. Four people are interviewed who are part of the target audience. The interviewed people are called participants. All participants volunteer for the interview without any extrinsic incentive, and agree to be recorded and quoted anonymously. \cite{Abras2004} \cite{wilson2013interview}
+To identify the needs and expectations of users, potential users are interviewed for background interviews. The background interviews are semi structured. All people who drive cars are potential users of the application. Because the application solves a specific problem which is applicable to most drivers, the target audience is not segmented into smaller groups. Four people are interviewed who are part of the target audience. The interviewed people are called participants. All participants volunteer for the interview without any extrinsic incentive, and agree to be recorded and quoted anonymously. \cite{Abras2004} \cite{wilson2013interview}
 
+
+% Needs rework anyway
 To clearly identify the questions, a nomenclature is introduced. The nomenclature term is limited by squared brackets. The term consists of a capital \textit{Q}, a \textit{dot} and a \textit{positive integer}. The \textit{Q} indicates that the nomenclature is used for questions. The \textit{dot} indicates that the following number implies the number of the referred question. The \textit{positive integer} uniquely defines the referred question. An example for the nomenclature of the questions is [Q.1].
 
     
 \paragraph{[Q.1] In which situations in your past could you not find your parked car?}
-The two most mentioned locations where users have troubled finding their car are \textit{big parking lots}, mentioned by three of the four participants, and \textit{multi-storey parking lots}, mentioned by two of the four participants.
+The two most mentioned locations where users have troubled finding their car are big parking lots, mentioned by three of the four participants, and multi-storey parking lots, mentioned by two of the four participants.
 
 \paragraph{[Q.2] Imagine you cannot remember where exactly you parked your car. Could you describe how you would approach finding your car?}
 When asked to describe their approach on finding their parked car if the exact location is not known, three out of four participants say they would walk around the area where the car should be. Two of four would use the remote key of the car to unlock and lock the car to create visual and auditory feedback to indicate if the car is near by.
 
 \paragraph{[Q.3] Please list the two or three features which are most important for you in an application, which helps you to find your parked car.}
-The two most important aspects of the application, each mentioned by two of the four participants, are the \textit{accuracy} of the determined parking position and the \textit{functionality of the application without user input}.
+The two most important aspects of the application, each mentioned by two of the four participants, are the accuracy of the determined parking position and the functionality of the application without user input.
 
 \paragraph{[Q.4] How accurate to you expect the application to be?}
 All of the participants express that an accuracy of 10 meters is sufficient for the determined parking position. Only two of four participants express than an accuracy of 50 meters is sufficient.
@@ -53,12 +55,11 @@ Only one of the participants is aware, that Google Maps and Apple Maps provide t
 \paragraph{[Q.14] Do you drive more often in cities or rural areas? A city is defined as a town with a population greater than 100.000 people.}
 Two of the participant report that they drive most often in urban areas. The other two either drive in rural and urban areas equally or primarily in rural areas.
 
-%Four participants are interviewed about their needs and expectation of an application to support users to find their parked car. For the asked questions, an nomenclature is introduced. The answers to each question are summarised. 
 
 \section{Requirements}
-In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the \textit{background interviews} and the limitations of the Bachelor thesis. To uniquely identify the requirements, a nomenclature is introduced. The requirements are split into functional and non-functional requirements. A \textit{functional requirement} ''specifies a function that a system or system component must be able to perform.'' \cite{eide2005quantification}. A \textit{non-functional requirement} is defined as a requirement which is not an \textit{functional requirements}, such as \textit{data requirements, constraints and quality requirements}. \cite{eide2005quantification}
+In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the \textit{Background Interviews} and the limitations of the Bachelor thesis. To uniquely identify the requirements, a nomenclature is introduced. The requirements are split into functional and non-functional requirements. A functional requirement ''specifies a function that a system or system component must be able to perform.''. A non-functional requirement is defined as a requirement which is not an functional requirements, such as data requirements, constraints and quality requirements. \cite{eide2005quantification}
 
-% define and explain nomenclature
+% Needs to be updated anyway
 To uniquely identify the requirements, a nomenclature is introduced. The nomenclature term is limited by squared brackets. The term consist of \textit{two letters}, one \textit{dot}, and one \textit{positive integer}. The two letters can be either \textit{RF} or \textit{RN}. \textit{RF} indicates that the requirement is a \textit{functional requirement}. \textit{RN} indicates that the requirement is a \textit{non-functional requirement}. The \textit{dot} separates the two letters from the positive integer. The \textit{positive integer} indicates the number of the requirement in its requirements type. An example for the nomenclature of the questions is [RF.1].
 
 
@@ -74,12 +75,12 @@ In [Q.5], all participants report that they expect to see the position of the ca
 In [Q.5], two out of four participants express their expectation to see also their current position on a map. This helps the user to orientate and find their car more easily. Thus, showing the current position of the users on a map is defined as a requirement for the application.
 
 \paragraph{[RF.4] If the car is parked in a multi-storey parking lot, the application indicates the level of the car}
-In [Q.1], two out of four participants report they could not find their can on a \textit{multi-storey parking lot}. To be helpful in the context of such a parking lot, the application needs to indicate the level on which the car is parked. Otherwise, the user has to look for their car on multiple levels. Thus, indicating the level of the car if it is parked on a multi-storey parking lot is defined as a requirement for the application.
+In [Q.1], two out of four participants report they could not find their can on a multi-storey parking lot. To be helpful in the context of such a parking lot, the application needs to indicate the level on which the car is parked. Otherwise, the user has to look for their car on multiple levels. Thus, indicating the level of the car if it is parked on a multi-storey parking lot is defined as a requirement for the application.
 
 \subsection{Non-functional Requirements}
 
 \paragraph{[RN.1] The application uses the spatial trajectory analysis of the user to determine the parking position of the users car.}
-Two of four participants express, that the need of direct user input would prevent them from using the application.To achieve this, the Bachelor thesis limits itself to use spatial trajectory analysis to determine the parking position of a car. Thus, determining the the parking position of a car by \textit{spatial trajectory analysis} is defined as a requirement of the application.
+Two of four participants express, that the need of direct user input would prevent them from using the application.To achieve this, the Bachelor thesis limits itself to use spatial trajectory analysis to determine the parking position of a car. Thus, determining the the parking position of a car by spatial trajectory analysis is defined as a requirement of the application.
 
 \paragraph{[RN.2] The application is developed for iOS 12}
 The Bachelor thesis limits itself to develop an application which runs on an iPhone by Apple. The application is developed to run on the most recent stable operating system for iPhone's, iOS 12. Thus, is defined as a requirement of the application that it runs on iOS 12.
@@ -96,7 +97,7 @@ In [Q.5], half of the participants express that they had issues finding their pa
 
 
 \paragraph{[RN.6] The application can determine the position of the users ca in a multi-storey parking lot.}
-In [Q.5], two of four participants report having problems finding their parked car on a \textit{multi-storey parking lot}. Thus, the application is required to help the user find their parked car in a multi-storey parking lot. 
+In [Q.5], two of four participants report having problems finding their parked car on a multi-storey parking lot. Thus, the application is required to help the user find their parked car in a multi-storey parking lot. 
 
 
 
