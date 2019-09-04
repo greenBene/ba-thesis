@@ -1,96 +1,135 @@
 \chapter{Design}
 
 \section{User Interface}
-The first section, \textit{User Interface}, presents the four user interface iterations. Each iteration is presented and the changes to the previous generation are highlighted.
+The first section, \textit{User Interface}, presents the designed four user interface. First, the four iterations and the changes between them are presented. Second, the final user interface design is discussed with usability heuristics by Nielsen and Apple.
+
+\subsection{Iterations}
+In this part, the different iterations of the user interface and their related think aloud protocol results are presented. The full user interface of each iteration can be seen in appendix \ref{appendix:userInterface}.
+
+\paragraph{First Iteration}
+
+The first iteration consist of five views. The application starts with the ''MapView - Loading'' view (cp Figure \ref{fig:i1-mv-loading}). The view shows a map on which the location of the users marked. At the top of the page a string indicates the current loading state of the system.
+
+If the application fails to determine the parking position, a pop-up menu is shown (cp. Figure \ref{fig:i1-mv-error}) which notifies the user about the problem and explains the cause of the failure. 
+
+On successful determination of the parking position, the view ''MapView - Determined Parking Postition'' (cf. Figure \ref{fig:i1-mv-parking}) is shown. It shows a map with the users location and the determined location of the users car. The label of the users car is clickable and opens ''MapView - Details''. 
+
+''MapView - Details'' (cp. Figure \ref{fig:i1-mv-details}) presents more details about the determined parking position. It presents the address where the car is parked, the distance to the users car, the altitude difference between the user and the users car and the floor of the parked car. Two buttons are presented: One button opens a third party navigation software to navigate to the determined location, and a button to initiate reporting the accuracy of the determined parking position of the car by opening the ''Feedback'' view.
+
+The ''Feedback'' (cp Figure \ref{fig:i1-feedback}) view presents the user instructions to report the accuracy of the determined parking position, the transmitted information and a button to report the information. When the button is clicked, the information is send and the application returns to the previous view, ''MapView - Details''. The user can also go back to the previous screen without sending any information by using the ''Back'' button.
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{images/UI/Iteration1-Overview.png}
-    \caption{Iteration 1 - Storyboard}
-    \label{fig:i1story}
-\end{figure}
+The think aloud protocol shows two problems of the user interface. First, in the view ''MapView - Parking Position Determined'', the user does not understand that the car icon is clickable. Second, the user expects to be able to give feedback in text form in the ''Feedback'' view.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{images/UI/[I1V1]MapView-Loading.png}
-    \caption{[I1V1] MapView - Loading}
-    \label{fig:i1v1}
-\end{figure}
+\paragraph{Second Iteration}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/UI/[I1V2]MapView-Error.png}
-    \caption{[I1V1] MapView - Error}
-    \label{fig:i1v2}
-\end{figure}
+In the second iteration of the user interface, the two problems of the first iteration are improved. The views ''MapView - Details'' and ''MapView - Parking Position Determined'' are merged. This is done to present the user directly all details of the determined parking position. 
+As the main view, ''MapView - Parking Position Determined'' (cp. Figure \ref{fig:i2-mv-parking}) now shows a partly transparent white box, this element is also added to the ''MapView - Loading'' view to keep the user interface consistent. It contains a button to initiate the determination of the car manually. 
+In the new ''MapView - Parking Position Determined'' view, the call to action to give feedback is rephrased to ''Send accuracy'' to better represent the kind of feedback which can be given. The headline of the ''Feedback'' (cp. Figure \ref{fig:i2-feedback} view is changes accordingly. A pup up is introduced in the ''Feedback'' view to confirm the successfull sending of the accuracy.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/UI/[I1V3]MapView-ParkingPositonDetermined.png}
-    \caption{[I1V3] MapView - Parking Position Determined}
-    \label{fig:i1v3}
-\end{figure}
+The think aloud protocol of the second iteration shows three obstacles. First, the altitude in the view ''MapView - Parking Position Determined'' is understood as total altitude of the car, but it shows the relative altitude of the car compared to the current altitude of the user. Second, the user is unsure if the presented address the same view is the address of the location of the car but assumes so. Third, the user does not notice in the ''Feedback'' view that the accuracy is supposed to be reported at the actual parking position of the car.
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/UI/[I1V4]MapView-Details.png}
-    \caption{[I1V4] MapView - Details}
-    \label{fig:i1v4}
-\end{figure}
-
-
-The first iteration consist of five views. The storyboard of the user interface can be seen in Figure \ref{fig:i1story}. The application starts with the ''MapView - Loading'' view (cp. Figure \ref{fig:i1v1}). The view shows a map on which the location of the users marked. At the top of the page a string indicates the current loading state of the system. The string is included to make the state of the system visible. The map and the user location are shown to map the system to the real world. \cite{heurisitcNielsen}
-
-If the application fails to determine the parking position, a pop-up menu is shown (cp. Figure \ref{fig:i1v2}) which notifies the user about the problem and explains the cause of the failure. 
-
-On successful determination of the parking position, the view [I1V3] (cp. Figure \ref{fig:i1v3} is shown. View [I1V3] shows a map with the users location and the determined location of the users car. The label of the users car is clickable and opens [I1V4] (cp. Figure \ref{fig:i1v4}. 
-
-[I1V4] presents more details about the determined parking position. It presents the address where the car is parked, the distance to the users car, the altitude difference between the user and the users car and the floor of the parked car. Two buttons are presented: One button opens a third party navigation software to navigate to the determined location, and a Feedback button, to report the accuracy of the determined parking position of the car. When the Feedback button is clicked, the application switches to view [I1V5] (cp. Figure \ref{fig:i1v5}).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/UI/[I1V5]Feedback.png}
-    \caption{[I1V5] Feedback}
-    \label{fig:i1v5}
-\end{figure}
-
-[I1V5] presents the user instructions to report the accuracy of the determined parking position, the transmitted information and a button to report the information. When the button is clicked, the information is send and the application returns to view [I1V4]. The user can also go back to the previous screen without sending any information by using the Back button.
-
-
-The think aloud protocol shows two problems of the user interface. First, in the view [I1V3], the user does not understand that the car icon is clickable. Second, the user expects to be able to give feedback in text form in view [I1V5].
-
-\subsection{Iteration 2}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/UI/[I2V1]MapView-Loading.png}
-    \caption{[I2V1] MapView - Loading}
-    \label{fig:i2v1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/UI/[I2V3]MapView-DeterminedParkingPosition.png}
-    \caption{[I2V3] MapView - Determined Parking Position}
-    \label{fig:i2v1}
-\end{figure}
-
-
-
-In the second iteration of the user interface, the two problems of Iteration 1 are improved. The view [I1V3] is removed completely in the second iteration. When the application determines the position of the car, the user interface presents directly the detailed information.  In view [I1V4], the call to action to send Feedback is rephrased to say  ''Send Accuracy'' to better represent the actual functionality. The headline of view [I1V5] is also changed to ''Send Accuracy''. Because most views with a map show a white partly transparent box on the bottom, the loading view is adapted to also show the box (cp. Figure \ref{fig:i2v1}). This is done to keep the interface consistency in the application. 
-
-The think aloud protocol of the second iteration shows three obstacles. First, the altitude in [I2V3] is understood as total altitude of the car, but it shows the relative altitude of the car compared to the current altitude of the user. Second, the user is unsure if the = presented address in [I2V3] is the address of the location of the car but assumes so. Third, the user does not notice in [I2V4] that the accuracy is supposed to be reported at the actual parking position of the car.
-
-\subsection{Iteration 3}
-
+\paragraph{Third iteration}
 
 The third iteration improves on the three obstacles of the previous iteration. 
-First, the altitude is separated into the two rows ''Relative altitiude'', which shows the relative altitude between the determined location of the parked car and the user location, and ''Floor'', which shows the floor in which the car is parked. Second, the headline ''Your car is parked at: '' is added to the details of the determined parking location to clarify that the shown information are information about the determined parking location. 
+First, in the view ''MapView - Parking Position Determined'' (cp. Figure \ref{fig:i3-mv-parking}) the altitude information is split  into two rows. The row ''Relative Altitude'' shows the relative altitude between the users location and the cars location. The row ''Floor'' shows the floor of the determined parking location, if the data is available. Second, the headline ''Your car is parked at: '' is added to the view ''MapView - Parking Position Determined'' to clarify that the presented information are about the determined parking position. Third, a pop-up is introduced in the view ''Feedback'' (cp. Figure \ref{fig:i3-feedback-con}) to ensure the user is actually at the location of the parked car. 
 
-The think aloud protocol of the third iteration only shows one confusion: The call to action of the ''Send Accuracy'' is unclear
+The third iteration of the interface shows, that the call to action on the ''MapView - Parking Position Determined'' view is still not clear. The user is confused because the wording is unusual for giving feedback to improve an application.
 
-\subsection{Iteration 4}
+\paragraph{Fourth Iteration}
 
-To improve on the unclear call to action of the ''Send Accuracy'' button, the call to action is changed to ''Report Accuracy''.
+To make the call to action to report the accuracy on the view ''MapView - Parking Position Determined'' (cf. Figure\ref{fig:i4-mv-parking}) ore clear, it is rephrased to ''Report accuracy''. The headline of the view ''Feedback'' (cf. Figure \ref{fig:i4-feedback}) is updated accordingly. To the view ''MapView - Parking Position Determined'' a small button is added to refresh the parking position of the car. 
+
+
+In the four iterations of the user interface design, five design issues are removed. First, the call to action to send the accuracy is changed to ''Report Accuracy'' to make clear that no manual input is required and the user helps to evaluate the application. Second, the details of the determined parking location are made easier accessible by showing them as soon as the parking location is determined. Third, a confirmation dialog is introduced for the the reporting of the accuracy to ensure the user is at the location of their parked car. Fourth, a headline is introduced to clarify that the shown details are about the determined parking location. Fifth, the altitude data is presented in a clearer way by splitting the floor information and the altitude information into two rows and renaming ''Altitude'' to ''Relative Altitude'' to show that the altitude is relative to the users current location.
+
+
+\subsection{Discussion of Final User Interface Design}
+
+In the second part, \textit{Discussion of Final User Interface Design}, discusses the final user interface design. The different views are presented and and design decisions argued based on the user interface heuristics by Apple and Nielsen. \cite{nielsen1994usability} \cite{apple:interfaceguidliines}.
+
+\paragraph{MapView - Loading}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/UI/Iteration4-MapView-Loading.png}
+    \caption{Map View - Loading}
+    \label{fig:mv-loading}
+\end{figure}
+
+The application starts in the ''MapView - Loading'' view, shown in Figure \ref{fig:mv-loading}. The view consist of a map and a button to initiate the determination of the parking location of the users car. The show map supports the users to orientate themselves in their current environment by presenting their location on the map. Thus, the second heuristic from Nielsen, ''Match between system and the real world'', is implemented. The map is interactive and can be zoomed, moved and rotated. The button to determine the parking position of the users car is placed on top of a white and partly transparent box to ensure a sufficient contrast between the map and the button. The design fulfils Apples design guidelines for Maps. The basic design of a map with a white, partly transparent box is used for all of the apps views, except the ''Feedback'' view, to keep the design simple and consistent, according tho Nielsens fourth and eights heuristic. \cite{nielsen1994usability} \cite{apple:interfaceguidliines}
+
+
+\paragraph{MapView - Error}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/UI/Iteration4-MapView-Error.png}
+    \caption{Map View - Error}
+    \label{fig:mv-error}
+\end{figure}
+
+If the application fails to determine the parking position of the users car, it shows the view ''MapView - Error'', shown in Figure \ref{fig:mv-error}. The view shows a map with the users location. On the bottom, an error message is printed on top of a white, partly transparent box. The error message explains in an understandable way for the users, why the application failed to determine the parking position. Below the error text, a button is shown. When pressed, the application tries to determine the parking position again. With the understandable error message and the promoted button to retry, the application confirms to Nielsens ninth heuristic, ''Help users recognize, diagnose, and recover from errors''. \cite{nielsen1994usability}
+
+\paragraph{Map View - Parking Position Determined}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/UI/Iteration4-MapView-ParkingPositionDetermined.png}
+    \caption{Map View - Parking Position Determined}
+    \label{fig:mv-parking}
+\end{figure}
+
+The view ''Map View - Parking Position Determined'', shown in Figure \ref{fig:mv-parking}, is the main view of the application. It is shown when the application determined successfully the parking position of the users car. A map and a partly transparent white box is shown. On the map, the users current location and the position of the users car are marked. The users location is presented with a blue point with a blue triangle, pointing in the direction the user is headed. The location of the car is marked with a stylised car surrounded by a blue, transparent circle. The car icon is on the exact location, the application determined and the blue circle represents the accuracy of the determined parking location. The map view is chosen to match the system to the surroundings of the user. On the bottom of the screen, detailed information of the determined parking location are presented. The address, the distance to the current location, the relative altitude and the floor in which the car is parked are shown. Above the details the headline ''Your car is parked at'' clearly identifies the listed information as related yo the users car. Three buttons are shown. The first button, in the upper right corner of the white box, refreshed the determined parking location. The second button, labelled ''Directions'', opens a third party navigation software to navigate to the determined location. Because navigation apps, such as Apple Maps and Google Maps, use the color blue to indicate a button which starts a navigation, the color blue is also chosen for the ''Directions'' button. The third button, labeled ''Report Accuracy'', initiates the process of reporting the accuracy of the determined parking location. The refresh button and the ''Report Accuracy'' button are both colored white to not draw extra attention to them. Most users should not need to use them on a regular base. \cite{nielsen1994usability}
+
+
+\paragraph{Feedback}
+
+
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/UI/Iteration4-Feedback.png}
+    \caption{Feedback}
+    \label{fig:feedback}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/UI/Iteration4-Feedback-Confirmation.png}
+    \caption{Feedback - Confirmation}
+    \label{fig:feedback-con}
+  \end{minipage}
+  
+\end{figure}
+
+The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the users to report the accuracy of the determined parking location. This functionality enables the quantitative evaluation of the systems accuracy. The text in the upper half of the screen explains how to report the accuracy and what kind of data is transmitted. A complete list of the to transmit data is shown in the bottom half. The ''Back'' button in the upper left corner navigates the system back to the view ''MapView - Parking Position Determined'' without transmitting any data. The button on the bottom, labelled ''Report Accuracy'', brings up a pop up in which the users are asked, if they are at the location of the parked car (cp. Figure \ref{fig:feedback-con}). User tests have shown that the instructions in the explaining text are often skimmed, thus this second check is necessary to keep the reported accuracy usable. If the user confirms their location, the data is send and a confirmation is shown (cf. Figure \ref{fig:feedback-succ}. The view changes back to the view ''MapView - Parking Position Determined''. If the user does not confirm their location, a pop up is shown (cp. Figure \ref{fig:feedback-fail}) which asks the user to report the accuracy at the location of their parked car. The ''Back'' button enables the user to be in control if they want to share any information. The confirmation dialog prevents users from accidental sending the accuracy at the wrong location. Thus, the view fulfills the third and fifth heuristic by Nielsen. \cite{nielsen1994usability}
+
+
+
+
+
+\begin{figure}[h]
+  \centering
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/UI/Iteration4-Feedback-Failure.png}
+    \caption{Feedback - Failure}
+    \label{fig:feedback-fail}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/UI/Iteration4-Feedback-Success.png}
+    \caption{Feedback - Success}
+    \label{fig:feedback-succ}
+  \end{minipage}
+\end{figure}
+
+
+
+\section{Determining the location of the users car}
+In the second section, \textit{Determining the location of the users car}, 
