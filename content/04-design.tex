@@ -130,4 +130,92 @@ The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the users to 
 \end{figure}
 
 \section{Determining the location of the users car}
-In the second section, \textit{Determining the location of the users car}, 
+In the second section, \textit{Determining the location of the users car}, the approach to determine the location of the users car is described. The used transportation mode of the users spatial trajectory data is classified for a floating window of three segments. The parking position of the user is determined as the end point of the last significant stage with the transportation mode car.
+The first section, \textit{Preprocessing}, describes the taken steps to clean and prepare the data of the geolife dataset.
+The second section, \textit{Feature Extraction}, names and defines all features generated based on the geolife dataset.
+The fifth section, \textit{Data Validation}, validates the generated data and drops all unplausable data.
+The fourth section, \textit{Classification}, presents the uses machine learning model, XGBoost, and argues for its usage.
+The fifth section, \textit{Parking Position Determination}, explains how the parking position of a users car is determined by using the transportation mode classification of the users spatial trajectory data.
+
+\subsection{Preprocessing}
+The first section, \textit{Preprocessing}, describes the taken steps to clean and prepare the data of the geolife dataset.
+
+The geolife data set \cite{zheng2010geolife} \cite{zheng2008understanding} \cite{geolife-dataset} \cite{zheng2009mining} is created by Microsoft Research Asia in the context of the GeoLife project. It consist of spatial trajectories which are created by 182 users over five years. 69 of the users label their trajectories with the used transportation mode. The labels are saved in separate files. The labels have timestamps and needs to be joined to the trajectories. All trajectories without transportation mode labels are ignored.
+
+To enable better access to the timestamp of the trajectories, the columns ''date'' and ''time'' are combined into one datetime column. All unused or redundant columns, such as ''date'', ''time'', and ''days\_total'' are dropped. As only the transportation modes ''car'', ''walk'', ''bike'', and ''train'' are used for classification, all rows with other transportation modes are dropped. 
+
+The geolife dataset is joined with the transportation mode labels if possible. Then it is cleaned from unlabeled and unused rows and columns to be ready for the feature extraction. 
+
+\subsection{Feature Extraction}
+The second section, \textit{Feature Extraction}, names and defines all features generated based on the GeoLife dataset.
+
+To enable the classification of the transportation mode, features are extracted from the GeoLife dataset. The classification is bases on a floating window set of three consecutive trajectory segments. Thus, all features are created based on three consecutive segments with the same transportation mode.
+
+There are two kinds of features: First, individual features based on one single section, such as velocisty, acceleration and bearing change. Second, aggregated features based on a floating set of three segments. These are aggregations of the features individual to the segments, such as the minimum, the maximum, the range, the sum, the average, and the variance. In the following, the used features are defined.
+
+\subsubsection{Individual Features}
+The part \textit{Individual Features} describes the features that are generated for each individual segment. 
+
+\paragraph{Velocity} The velocity of a trajectory is the movement speed of the tracked object. It is defined as $v(p_n) = Dist(p_n, p_{n+1})/(t(p_{n+1}) - t(p_n))$ with $Dist$ as a function to calculate the the distance between two coordinates and $t$ being the function that returns the timestamp of a point of a trajectory. \cite{Zheng2008}
+
+\paragraph{Acceleration} The acceleration of a trajectory is the increase or decrease of speed in the given time. It is defines as $ a(p_n) = (v(p_{n+1}) - v(p_n))/(t(p_{n+1}) - t(p_n)$. \cite{Zheng2008}
+
+\paragraph{Bearing Change} The bearing is the direction in which an object is heading in a spatial coordinate system. The bearing change is the absolute change of the bearing between two consecutive coordinates. It is defined as $ brCh(p_n) = 180 - | |brgn(p_n) - brng(p_{n+1})
+| - 180| $ with $brng$ as the function that returns the bearing of the segment, defined as 
+\begin{align*}
+            y =& \sin (lon(p_{n+1})-lon(p_n)) \cdot \cos(lat(p_{n+1}) \\ 
+            x =& \cos (lat(p_n)) \cdot \sin (lat(p_{n+1}))-\sin (lat(p_n))\\
+               & \cdot \cos (lat(p_{n+1})) \cdot \cos(lon(p_{n+1})-lon(p_n)) \\
+    brng(p_n) =& arctan(y,x)
+\end{align*} \cite{Dabiri2018}
+
+\subsubsection{Aggregated Features}
+The part \textit{Aggregated Features} describes the funtions used to aggregate all features of the same kind of a floating window with three segments. As the functions are applied to all three individual features, the aggregation features are describes for the generic set $X$.
+
+\paragraph{Maximum} The maximum of a set is the highest value in the set. It is defined as $ \max (X) = \max(x \in X)$.
+
+\paragraph{Minimum} The minimum of a set is the lowest value in the set. It is defined as $ \min (X) = \min (x \in X) $.
+
+\paragraph{Range} The range of a set is the difference between its minimum and its maximum. It is defined as $ range(X) = max(X) - min(X)$.  
+
+\paragraph{Sum} The sum of a set is the sum of its elements. It is defined as $sum(X) = \sum_{x\in X} (x)$
+
+\paragraph{Average} The average of a set is the mean value of the set. It is defined as $ avg (x) = sum(X)/|X|$.
+
+\paragraph{Variance} The variance of a set it the squared deviation of the sets mean. It is defined as $var (X) = \sum_{x\in X} (x - avg(X))^2/|X| $.  
+
+All aggregated features a generated for each kind of individual feature. Thus, for each sliding window with three segments, 9 individual features and 18 aggregated features are defined. 
+
+\subsection{Data Validation}
+% Data validation
+The fifth section, \textit{Data Validation}, validates the generated data and drops all data that seems to be invalid.
+
+To ensure no invalid data is used for the classification of the machine learning model, the data is cleaned using thresholds for speed and acceleration based on the transportation mode of the given set of segments. The thresholds are adapted from \cite{Dabiri2018} and can be seen in table \ref{table:thresholds}.
+ 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{l l l l} 
+     \hline
+     Transportation mode & Maximum velocity ($m/s$) & maximum acceleration ($m/s^2$)\\
+     \hline
+     Walk & 7 & 3 \\
+     Bike & 12 & 3 \\
+     Car & 50 & 10 \\
+     Train & 34 & 3 \\
+     \hline
+    \end{tabular}
+    \caption{The used thresholds for velocity and acceleration \cite{Dabiri2018}}
+    \label{table:thresholds}
+\end{table}
+
+All segments with a velocity or acceleration that extends the defined thresholds are dropped. 
+
+\subsection{Classification}
+The fourth section, \textit{Classification}, presents the uses machine learning model, XGBoost, and argues for its usage.
+
+The used machine learning model is the XGBoost algorithm. XGBoost ''is an optimized distributed gradient boosting library designed to be highly efficient, flexible and portable''. The algorithm is used because it shows the best performance compared to other tree-based ensemble classifiers algorithms, such as Random Forest, Gradient Boosting Decision Tree and Support Vector Machine, and also compared to precious works that use other algorithms, such as \cite{Zheng2008} and \cite{dodge2009revealing}. \cite{Xiao2017} \cite{chen2016xgboost}
+
+\subsection{Parking Position Determination}
+The fifth section, \textit{Parking Position Determination}, explains how the parking position of a users car is determined by using the transportation mode classification of the users spatial trajectory data. 
+
+To determine the parking position of the user car, the transportation mode of the most recent spatial trajectory data of the user is classified until a block of four consecutive sliding window sets are found that have ''car'' as their classified transportation mode. Four consecutive window sets are required to reduce the impact of false positive errors. The end point of the most recent segment form this set is defined as the parking position of the users car. 
