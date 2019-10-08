@@ -1,4 +1,32 @@
 \chapter{Implementation}
+Th fifth chapter, \textit{Implementation}, describes the actual implementation of the training of the machine learning model used for classifying the transportation of the user and of the application to determine the parking position of the users car. The code of the application\footnote{Source Code: ba-parking-position-determination, \url{https://github.com/greenBene/ba-parking-position-determination/}, (last accessed  October 7, 2019)} and of the implementation of the machine learning model training\footnote{Source Code: ba-ml-model, \url{https://github.com/greenBene/ba-ml-model}, (last accessed  October 7, 2019)} are hosted on GitHub.
+In the first part, \textit{Architecture}, the chosen architecture for the developed application is presented and discussed.
+In the second part, \textit{Technologies}, the most important of the used technologies are presented and and it is discussed why they are chosen.
+In the third part, \textit{Details of Implementation}, several noteworthy code excerpts of the application and the implementation of the machine learning workflow, are presented and discussed.
+
+\section{Architecture}
+In the first part, \textit{Architecture}, the chosen architecture for the developed application is presented and discussed.
+
+Software architecture describes the fundamental structure of a system. There are several standardized architectures. On of the most used one in the development for iOS is the Model View Controller (MVC). It consists of three main object types: The model, the view and the controller. The model represents everything regarding the logic of the data. It is responsible for loading and saving data, for performing computation based on the data and saved the current state of the system. The view is responsible for the visual representation of the application. Everything related to the user interface and how the system is presented to the user goes through the views. The controller is responsible for the user input and the non business logic of the application. 
+
+In the application, implemented for the Bachelor thesis, each of the three main objects consists of three elements. 
+The model of the application consist of the elements Location, StayPoint and ParkingPositionDetermination. Location and StayPoint are both classes used to represent the trajectory elements they are named after. The ParkingPositionDetermination contains all the logic used to determine the parking position based on a users spatial trajectory. 
+The view costis of the elements Main.storyboard, CarAnnotationView and CarAnnotation. CarAnnotationView and CarAnnotation are classes used for visualising the position of the users car on the map. The Main.storyboard is the element where the three main views can be found. In here, all user interface elements, their position relative to each other and their properties are defined.
+The controller consist of the LoadingMapViewController, the ParkingPositionDeterminedMapViewController and the FeedbackViewController. All of the mentioned controllers handle the user input and also load the data to show to the user from the model. 
+
+\section{Technologies}
+
+\subsection{Realm Database}
+Realm 
+
+\subsection{Alamofire}
+
+\section{Details of Implementation}
+\subsection{Machine Learning Workflow}
+
+\subsection{Application}
+
+
 
 
 \begin{lstlisting}[style=swift, caption={Swift example}]

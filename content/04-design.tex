@@ -1,7 +1,10 @@
 \chapter{Design}
+The fourth chapter, \textit{Design}, presents the results of the user interface design, used the machine learning workflow and the created algorithm to determine the parking position of a users car. The first section, \textit{User Interface}, presents the four iterations of the user interface and explains the design decisions of the final user interface design.  The second section, \textit{Machine Learning}, describes the used process to train a machine learning model that determines the transportation mode of a spatial trajectory. The third section, \textit{Determine the Parking Position}, describes the algorithm used to determine the parking position of a users car based on their spatial trajectory. 
+
+
 
 \section{User Interface}
-The first section, \textit{User Interface}, presents the designed four user interface. First, the four iterations and the changes between them are presented. Second, the final user interface design is discussed with usability heuristics by Nielsen and Apple.
+The first section, \textit{User Interface}, presents the designed user interface. First, the four iterations and the changes between them are presented. Second, the final user interface design is discussed with usability heuristics by Nielsen and Apple.
 
 \subsection{Iterations}
 In this part, the different iterations of the user interface and their related think aloud protocol results are presented. The full user interface of each iteration can be seen in appendix \ref{appendix:userInterface}.
@@ -107,10 +110,6 @@ The view ''Map View - Parking Position Determined'', shown in Figure \ref{fig:mv
 
 The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the users to report the accuracy of the determined parking location. This functionality enables the quantitative evaluation of the systems accuracy. The text in the upper half of the screen explains how to report the accuracy and what kind of data is transmitted. A complete list of the to transmit data is shown in the bottom half. The ''Back'' button in the upper left corner navigates the system back to the view ''MapView - Parking Position Determined'' without transmitting any data. The button on the bottom, labelled ''Report Accuracy'', brings up a pop up in which the users are asked, if they are at the location of the parked car (cp. Figure \ref{fig:feedback-con}). User tests have shown that the instructions in the explaining text are often skimmed, thus this second check is necessary to keep the reported accuracy usable. If the user confirms their location, the data is send and a confirmation is shown (cf. Figure \ref{fig:feedback-succ}. The view changes back to the view ''MapView - Parking Position Determined''. If the user does not confirm their location, a pop up is shown (cp. Figure \ref{fig:feedback-fail}) which asks the user to report the accuracy at the location of their parked car. The ''Back'' button enables the user to be in control if they want to share any information. The confirmation dialog prevents users from accidental sending the accuracy at the wrong location. Thus, the view fulfills the third and fifth heuristic by Nielsen. \cite{nielsen1994usability}
 
-
-
-
-
 \begin{figure}[h]
   \centering
   \hfill
@@ -129,29 +128,52 @@ The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the users to 
   \end{minipage}
 \end{figure}
 
-\section{Determining the location of the users car}
-In the second section, \textit{Determining the location of the users car}, the approach to determine the location of the users car is described. The used transportation mode of the users spatial trajectory data is classified for a floating window of three segments. The parking position of the user is determined as the end point of the last significant stage with the transportation mode car.
-The first section, \textit{Preprocessing}, describes the taken steps to clean and prepare the data of the geolife dataset.
-The second section, \textit{Feature Extraction}, names and defines all features generated based on the geolife dataset.
-The fifth section, \textit{Data Validation}, validates the generated data and drops all unplausable data.
-The fourth section, \textit{Classification}, presents the uses machine learning model, XGBoost, and argues for its usage.
-The fifth section, \textit{Parking Position Determination}, explains how the parking position of a users car is determined by using the transportation mode classification of the users spatial trajectory data.
+
+\section{Machine Learning}
+The second section, \textit{Machine Learning}, describes the used process to train a machine learning model that determines the transportation mode of a spatial trajectory.
 
 \subsection{Preprocessing}
-The first section, \textit{Preprocessing}, describes the taken steps to clean and prepare the data of the geolife dataset.
+The first part, \textit{Preprocessing}, describes the taken steps to clean and prepare the data of the geolife dataset.
 
-The geolife data set \cite{zheng2010geolife} \cite{zheng2008understanding} \cite{geolife-dataset} \cite{zheng2009mining} is created by Microsoft Research Asia in the context of the GeoLife project. It consist of spatial trajectories which are created by 182 users over five years. 69 of the users label their trajectories with the used transportation mode. The labels are saved in separate files. The labels have timestamps and needs to be joined to the trajectories. All trajectories without transportation mode labels are ignored.
+The geolife data set is created by Microsoft Research Asia in the context of the GeoLife project. It consist of spatial trajectories which are created by 182 users over five years. 69 of the users label their trajectories with the used transportation mode. The labels are saved in separate files. \cite{zheng2010geolife} \cite{zheng2008understanding} \cite{geolife-dataset} \cite{zheng2009mining}
 
-To enable better access to the timestamp of the trajectories, the columns ''date'' and ''time'' are combined into one datetime column. All unused or redundant columns, such as ''date'', ''time'', and ''days\_total'' are dropped. As only the transportation modes ''car'', ''walk'', ''bike'', and ''train'' are used for classification, all rows with other transportation modes are dropped. 
-
-The geolife dataset is joined with the transportation mode labels if possible. Then it is cleaned from unlabeled and unused rows and columns to be ready for the feature extraction. 
+First, the trajectories of the users that labeled their transportation modes are joined with the reported transportation mode based on their timestamps. All trajectories without labels are discarded. Second, all transportation modes, which are not relevant for the context of the Bachelor thesis are discarded. Only the trajectories of the transportation mode ''car'' and ''walk'' are used.
 
 \subsection{Feature Extraction}
-The second section, \textit{Feature Extraction}, names and defines all features generated based on the GeoLife dataset.
+The second part, \textit{Feature Extraction}, names and defines all features generated based on the GeoLife dataset.
 
-To enable the classification of the transportation mode, features are extracted from the GeoLife dataset. The classification is bases on a floating window set of three consecutive trajectory segments. Thus, all features are created based on three consecutive segments with the same transportation mode.
+To enable the classification of the transportation mode, features are extracted from the preprocessed GeoLife dataset. To enable the classification to use the context of a segment, the segments are not classified individually but as floating window sets of size three. As shown in \ref{table:comp_windows}, a trajectory can be divided into floating window sets by combining each segment with their directly following segments into a new set. All features are created based on floating window sets of the same transportation mode. \cite{Bolbol2012}
 
-There are two kinds of features: First, individual features based on one single section, such as velocisty, acceleration and bearing change. Second, aggregated features based on a floating set of three segments. These are aggregations of the features individual to the segments, such as the minimum, the maximum, the range, the sum, the average, and the variance. In the following, the used features are defined.
+\begin{table}[!htb]
+
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|c c c|} 
+        \toprule
+        $p_1$ & $p_2$ & $p_3$  \\
+        $p_4$ & $p_5$ & $p_6$  \\
+        $p_7$ & $p_8$ & $p_9$  \\
+        \bottomrule
+        \end{tabular}
+        \caption*{\small Windows of a trajectory}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|c c c|} 
+        \toprule
+        $p_1$ & $p_2$ & $p_3$  \\
+        $p_2$ & $p_3$ & $p_4$  \\
+        $p_3$ & $p_4$ & $p_5$  \\
+        \bottomrule
+    \end{tabular}
+    \caption*{\small Sliding windows of a trajectory}
+    \end{minipage} 
+    
+    \caption{Visualization of differences  between windows and sliding windows }
+    \label{table:comp_windows}
+\end{table}
+
+There are two kinds of features: First, individual features based on one single section, such as velocity, acceleration and bearing change. Second, aggregated features based on a floating window set. These are aggregations of the features individual of the segments, such as the minimum, the maximum, the range, the sum, the average, and the variance. In the following, the used features are defined.
 
 \subsubsection{Individual Features}
 The part \textit{Individual Features} describes the features that are generated for each individual segment. 
@@ -170,7 +192,7 @@ The part \textit{Individual Features} describes the features that are generated 
 \end{align*} \cite{Dabiri2018}
 
 \subsubsection{Aggregated Features}
-The part \textit{Aggregated Features} describes the funtions used to aggregate all features of the same kind of a floating window with three segments. As the functions are applied to all three individual features, the aggregation features are describes for the generic set $X$.
+The part \textit{Aggregated Features} describes the functions used to aggregate all features of the same kind of a floating window with three segments. As the functions are applied to all three individual features, the aggregation features are describes for the generic set $X$.
 
 \paragraph{Maximum} The maximum of a set is the highest value in the set. It is defined as $ \max (X) = \max(x \in X)$.
 
@@ -187,10 +209,9 @@ The part \textit{Aggregated Features} describes the funtions used to aggregate a
 All aggregated features a generated for each kind of individual feature. Thus, for each sliding window with three segments, 9 individual features and 18 aggregated features are defined. 
 
 \subsection{Data Validation}
-% Data validation
 The fifth section, \textit{Data Validation}, validates the generated data and drops all data that seems to be invalid.
 
-To ensure no invalid data is used for the classification of the machine learning model, the data is cleaned using thresholds for speed and acceleration based on the transportation mode of the given set of segments. The thresholds are adapted from \cite{Dabiri2018} and can be seen in table \ref{table:thresholds}.
+To ensure no invalid data is used for the classification of the machine learning model, the data is cleaned using thresholds for speed and acceleration based on the transportation mode of the given floating window set. The thresholds are adapted from \cite{Dabiri2018} and can be seen in table \ref{table:thresholds}.
  
 \begin{table}[h!]
     \centering
@@ -208,14 +229,209 @@ To ensure no invalid data is used for the classification of the machine learning
     \label{table:thresholds}
 \end{table}
 
-All segments with a velocity or acceleration that extends the defined thresholds are dropped. 
+All trips with segments that violate the defined thresholds are discarded.
 
-\subsection{Classification}
-The fourth section, \textit{Classification}, presents the uses machine learning model, XGBoost, and argues for its usage.
+\subsection{Model training}
+In the part, \textit{Model Training}, the used machine learning models are presented and explained. First, \textit{Multilayer Perceptron} is presented. Second, \textit{XGBoost} is presented. 
 
-The used machine learning model is the XGBoost algorithm. XGBoost ''is an optimized distributed gradient boosting library designed to be highly efficient, flexible and portable''. The algorithm is used because it shows the best performance compared to other tree-based ensemble classifiers algorithms, such as Random Forest, Gradient Boosting Decision Tree and Support Vector Machine, and also compared to precious works that use other algorithms, such as \cite{Zheng2008} and \cite{dodge2009revealing}. \cite{Xiao2017} \cite{chen2016xgboost}
+\subsubsection{Multilayer Perceptron}
+Multilayer Perceptron is a class of feedforward neural networks. They consist of at least three layers: the input layer, the hidden layers and the output layer. It can be depicted as a diagram, as show in Figure \ref{fig:mlp-struc}. This Figure shows the input layer X of size P, one hidden layer Y of size M and Y output layers of size K. Each node of a layer is connected to each of the nodes of the following layer. For the input data, a activation function is used. This function is often sigmoid $\sigma(v) = 1/(1+e^{-v})$. \cite{hastie2005elements}
 
-\subsection{Parking Position Determination}
-The fifth section, \textit{Parking Position Determination}, explains how the parking position of a users car is determined by using the transportation mode classification of the users spatial trajectory data. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/nn_struct.png}
+    \caption{Basic Multilayer Perceptron schema}
+    \label{fig:mlp-struc}
+\end{figure}
 
-To determine the parking position of the user car, the transportation mode of the most recent spatial trajectory data of the user is classified until a block of four consecutive sliding window sets are found that have ''car'' as their classified transportation mode. Four consecutive window sets are required to reduce the impact of false positive errors. The end point of the most recent segment form this set is defined as the parking position of the users car. 
+The neural network hast unknown parameters, called weights. For each connection between to nodes exists one weight. The set of all weights is denoted with $\Theta$. To generate these weights, the model is trained with a labelled training set. In each iteration, the error rate of the weights $R(\Theta)$ is being minimized using gradient decent, in this case called back-propagation. For classification, either the squared error or the deviance is used for the error function. \cite{hastie2005elements}
+
+\begin{align}
+    R(\Theta)=-\sum_{i=1}^N\sum_{k=1}^K y_{ik} \log f_k(x_i)
+\end{align}{}
+
+
+\subsubsection{XGBoost}
+XGBoost is a scalable tree boosting system. Since its release it is successfully used in a number of machine learning competitions, such as Kaggle. Its success is mainly caused by its scalability. The scalability is due to a number of ''important systems and algorithmic optimizations''. Namely these include a novel tree learning algorithm which can handle sparse data and also the introduction of approximate tree learning in its system. Due to this changes, the XGBoost ''runs more than ten times faster than existing popular solutions on a single machine''.  \cite{chen2016xgboost}
+
+The basic algorithm of xgboost is similar to other gradient boosting tree ensemble systems (Source Code \ref{code:xgboost}). The system iteratively tries to find the best decision tree for the given data, adds the created decision tree to a set of decision trees and increases the importance of the misclassified examples. In the following iteration, the system tries to find again the best decision tree, but because of the increased importance of the previously misclassified exampled, these are more strongly considered. The algorithm stops if the maximum of allowed trees are generated. To classify an entry with the generated model, the entry is classified by each of the generated trees and their results are combined. \cite{chen2016xgboost}
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Basic XGBoost}, label={code:xgboost}]
+def xgboostClassifyer(data, labels, maxTrees):
+    i <- 0
+    trees <- Array()
+    while(i < maxTrees):
+        decTree <- findBestDecisionTree(data, labels)
+        trees.apped(decTree)
+        increaseImportanceOfMissclassifiedData(decTree, data, label)
+        i <- i + 1
+    
+    return trees
+\end{lstlisting}
+
+To generate the individual decision trees, several splits need to be chosen for it. The possible splits can be evaluated by a loss function. In XGBoost this loss function is based on the difference between the prediction and target values of a split, and on the complexity of the model. The exact greedy algorithm is very powerful in finding the next optimal split, because it iterates over all possible next splits. The downside of the algorithm is that its performance suffers if the given data does not fit completely into the memory. To enable a efficient computation also in this case, XGBoost implements an approximation algorithm for the split finding. \cite{chen2016xgboost}
+
+The approximate algorithm for split finding (Source Code: \ref{code:xgboost_approx}) proposes splits for a percentile of each of the m features. Then, the continuous features are sorted into buckets splits based on the generated candidate splits.The, the best best solution among the proposed ones is aggregated. To calculate the score for each split, the algorithm uses the loss function of XGBoost, which is represented by the first and second order gradient statistics( $g_j \in G$ and $h_j \in H$). 
+
+\begin{lstlisting}[style=py, caption={Pseudocode: XGBoost - Approximate Algorithm for Split Finding \cite{chen2016xgboost} }, label={code:xgboost_approx}]
+def approxSplitFinding():
+    
+    for k = 1 to m:
+        Propose Splits S_k = {s_k1, S_k2, ... s_kl} by percentiles on feature k
+    
+    for k = 1 to m:
+        G_kv <- all g_j, with s_kv >= x_jk > s_k,v-1
+        H_kv <- all h_j, with s_kv >= x_jk > s_k,v-1
+    
+    return split with best score based on G and H
+\end{lstlisting}
+
+\section{Determine the Parking Position}
+The third section, \textit{Determine the Parking Position}, describes the algorithm used to determine the parking position of a users car based on their spatial trajectory. 
+
+The idea of the algorithm to determination of the parking position of a users car (Source Code \ref{code:DetParkPos}) is to find the last location where a user drove a car. For this, the trajectory of the user is cleaned form noise. From the cleaned trajectory the stay points of the user are determined. With the stay points, the cleaned trajectory is cut into individual trips. Through the determined trips is inversely iterated, from newest trip to oldest trip. The first detected, but temporally last occurred, parking position candidate is returned as the parking position of the user
+
+The used algorithms in the parking position determination, namely the algorithms for noise removal, stay point detection, trip detection and parking position candidate detection are described in detail in the following parts. The classification of the transportation modes is based on the machine learning results from the section \textit{Machine Learning}.
+
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Determine Parking Position Candidate}, label={code:DetParkPos}]
+def determineParkingPosition(trajectory, distTresh, timeTresh, car_window_size):
+    trajectory <- removeNoise(trajectory)
+    stayPoints <- detectStayPoints(trajectory, distTresh, timeTresh)
+    trips <- cutIntoTrips(trajecotry, stayPoints)
+    
+    for t in trips.reversed():
+        labels <- classifyTransportationModes(t)
+        
+        parkPos <- detParkingPosCandidate(t, labels, car_window_size)
+        
+        if(parkPos != null):
+            return parkPos
+\end{lstlisting}
+
+
+
+\subsection{Noise Removal}
+The first part, \textit{Noise Removal}, describes the used method to reduce the noise of the users trajectory.
+
+Due to sensor noise or poor positioning signals, spatial trajectories can be inaccurate. To improve the classification the transportation mode of a users trajectory, this noise needs to be attenuated. The Bachelor thesis uses a mean filter for this task. The algorithm (Source Code \ref{code:noise}) iterates through the trajectory of the user and calculates the mean coordinates (Source Code \ref{code:meanCoord}) of every 5 consecutive points in the trajectory. The resulting trajectory is used for further processing. \cite{Zheng:2015:TDM:2764959.2743025}
+
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Noise Removal \cite{Zheng:2015:TDM:2764959.2743025}}, label={code:noise}]
+def removeNoise(trajectory):
+    cleaned <- Array()
+    if len(trajectory) < 3:
+        throw error
+    
+    for p in trajectory:
+        c <- compMeanCoord(trajectory[ i-2 ... i+2 ])
+        c.t <- trajectory[i]
+        cleaned.append(c)
+    
+    return cleaned
+\end{lstlisting}
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Compute Mean Coordinate \cite{Zheng:2015:TDM:2764959.2743025} }, label={code:meanCoord}]
+def compMeanCoord(coordinates):
+    lat <- 0; lon <- 0
+    
+    for p in coordinates:
+        lat <- lon + p.lat
+        lon <- lon + p.lon
+        
+    lat <- lat / len(coordinates)
+    lon <- lon / len(coordinates)
+    
+    return (lat, lon)
+\end{lstlisting}
+
+\subsection{Stay Point Detection}
+The second part, \textit{Stay Point Detection}, describes the used algorithm to determine the stay points of a user based on their trajectory. The stay points are needed to separate the trajectory of a user into trips.
+
+The stay point algorithm iterates through the trajectory and detects if the user stayed within a given threshold of distance longer than a given threshold of time. The time and distance threshold are necessary, because otherwise the algorithm could detect a cluster of points on a area where the user frequently travels through, like a major interception, but which has no further semantic meaning. The algorithm is mostly adapted form \cite{li2008mining}, but differs slightly. In the original algorithm, line 26 is right before the break command in line 22. This could lead to an infinity loop in which the variable i is never assigned a value greater than pointNum. \cite{li2008mining}
+
+
+\cite{li2008mining}
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Stay Point Detection \cite{li2008mining}}, label={code:stayPoint}]
+def detectStayPoints(trajectory, distTresh, timeTresh):
+    i <- 0; pointNum <- len(trajectory)
+    stayPoints <- Array()
+    
+    while i < pointNum:
+        j <- i + 1
+        while j < pointNum:
+            p_i <- trajectory[ i ]
+            p_j <- trajectory[ j ]
+            dist <- Distance(p_i, p_j)
+            
+            if dist > distTresh:
+                time <- p_j.t - p_i.t
+                
+                if time > timeTresh:
+                    sP <- compMeanCoord(trajectory[ i ... j ])
+                    sP.arrival <- p_i.t
+                    sP.leave <- p_j.t
+                    
+                    stapPoints.append(sP)
+                
+                break;
+            
+            j <- j+1
+        
+        i = j
+    
+    return stayPoints
+\end{lstlisting}
+
+
+\subsection{Trips}
+The third part, \textit{Trips}, describes the algorithm used to cut a trajectory into trips based on stay points. As the classification of the transportation mode of a trajectory is only relevant for the segments where the user is significantly moving, only the trajectory segments between stay points are relevant. The segments at stay points can be ignored.
+
+The algorithm (Source Code \ref{code:cutTrip}) determined the points of each trip between two stay points by selecting the points which have timestamps which are greater or equal than the leave time of the starting stay point and which are smaller or equal than the arrival time of the destinatin stay point. 
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Determine Trips in Trjajectory}, label={code:cutTrip}]
+def cutIntoTrips(trajecotry, stayPoints):
+    trips <- Array()
+    
+    for i in (0 ..< len(stayPoints)-1):
+        s_start <- stayPoint[ i ]
+        s_stop <- stayPoin[ i+1 ]
+        
+        index_start = trajecotry.firstIndexWhere( t >= s_start.leave)
+        index_stop = trajecotry.firstIndexWhere( t >= s_stop.arrival)
+        
+        trips.append(trajectory[index_start .. index_stop])
+    
+    return trips
+\end{lstlisting}
+
+
+\subsection{Determining Parking Position Candidate}
+The fourth part, \textit{Determining Potential Parking Position}, describes the approach to detect a candidate of a parking position in a trip. 
+
+To determine a parking position candidate, a heuristic is used: Wherever a user travelled by car last, the car is parked. As a trip is a travel from one stay point to another, the last occasion of a user traveling by car in a trip is a potential parking position candidate. To reduce false positive errors, the transportation mode needs to be classified consecutive as car movement over a defined threshold. The algorithm used to determine a parking position candidate (Source Code \ref{code:ParkCandidate}) iterates reversed through the classified transportation mode labels of the spatial trajectory of a trip. The start point of the temporally last segment of the windows which are consecutively labeled car movement is returned as potential parking position. 
+
+\begin{lstlisting}[style=py, caption={Pseudocode: Determine Parking Position Candidate}, label={code:ParkCandidate}]
+def detParkingPosCandidate(trip, labels, car_window_size):
+    counter <-0
+    
+    for i in (len(labels) - 1  ... 0):
+        if(labels[ i ] == "car"):
+            counter <- counter + 1
+        else
+            counter = 0
+        
+        if(counter = car_window_size):
+            return trip[ i + car_window_size ]
+   
+\end{lstlisting}
+
+
+
+
+
+
+
+
+

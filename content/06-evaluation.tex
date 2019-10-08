@@ -1,1 +1,44 @@
 \chapter{Evaluation}
+
+\section{Evaluation of Machine Learning Models}
+The first section, \textit{Evaluation of Machine Learning Models}, evaluates the trained machine learning models.
+
+To find a machine learning model to classify the spatial trajectory of a user into transportation modes, two models are trained. The parameters of both models are tuned by using the three-fold Cross-Validation. 
+
+The final parameters for the XGBoost Classifier are as follows: \linebreak objective = binary:logistic, learning\_rate = 0.2, max\_depth= 10, min\_child\_weight = 8, subsample = 0.4, and n\_estimators = 30. With these parameters the trained model reaches an total accuracy of 90.486\%. The precision, recall and f1 score differs 
+between the to classes slightly as seen in Table \ref{table:xgb_eval}. 
+
+% XGBOOST
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|} \toprule
+        class & precision & recall & f1-score & support \\ \midrule
+        car & 0.95 & 0.78 & 0.86 & 121972 \\
+        walk & 0.89 & 0.97 & 0.93 & 208984 \\ \bottomrule 
+    \end{tabular}
+    \caption{Evaluation of XGBoost Model}
+    \label{table:xgb_eval}
+\end{table}{}
+
+The final parameters for the Multilayer Perceptron Classifier are as follows: \linebreak hidden\_layer\_sizes =  (20,20,20,20), activation= relu, solver = adam, alpha = 0.0025, learning\_rate = adaptive, and max\_iter = 200. The trained model reaches an accuracy of 89.837\%. Again, the  precision, recall and f1 score differs between the to classes slightly as seen in Table \ref{table:mlp_eval}.
+
+% XGBOOST
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|} \toprule
+        class & precision & recall & f1-score & support \\ \midrule
+        car & 0.96 & 0.76 & 0.85 & 121972 \\
+        walk & 0.87 & 0.98 & 0.92 & 208984 \\ \bottomrule 
+    \end{tabular}
+    \caption{Evaluation of Multilayer Perceptron Model}
+    \label{table:mlp_eval}
+\end{table}{}
+
+As the XGBoost Classifier shows the better accuracy, this classifier is to chose over the Multilayer Perceptron Classifier for determining the transportation mode of a spatial trajectory. Noteworthy is the similarity between the results of both classifier. Not only the total accuracy is only differs by less than 1\%, but also the precision recall and f1-score of the individual classes each differ at a maximum of 2\%.
+     
+\section{Accuracy of Determined Parking Position}
+
+
+\section{Requirements}
+
+
