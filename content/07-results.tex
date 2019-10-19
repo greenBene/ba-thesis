@@ -1,15 +1,37 @@
 \chapter{Results}
-
-What happens in this chapter?
+The seventh chapter, \textit{Results}, presents the outcome of the Bachelor thesis. The first section, \textit{Summary}, summarises the results of the chapters \textit{Analysis}, \textit{Design}, \textit{Implementation} and \textit{Evaluation}. The second section, \textit{Limitations}, names and explains the limitations of the Bachelor thesis. 
 
 \section{Summary}
+The first section, \textit{Summary}, summarises the results of the chapters \textit{Analysis}, \textit{Design}, \textit{Implementation} and \textit{Evaluation}.
 
-\begin{itemize}
-\item sum up all facts, no opinion on the facts
-\end{itemize}
+To better understand the problem of finding a parked car in an unknown environment, four potential users are interview about their experiences with the problem. The interviewees report that they most often have to look for their car in either big parking lots, such as are often found in front of major furniture stores, and in multi-storey parking lots. When asked about a potential application to help users to find their parked car, the interviewees name most often two features. First, they expect such an application to be accurate. The majority of them agrees that an accuracy of better than 50 meters would be sufficient. Second, they expect the application to automatically determine the parking position of the car, without any manual user input. The need for manual user input would prevent some of the users form using the application. Based on the results of the interviews 5 functional and 8 non-functional requirements are defined for an application that helps users to find their parked car. 
+
+A prototype for the user interface design is developed based on the defined requirements. It is improved iteratively using the user-centric Think Aloud method. The final user interface consist of three main views: ''Map View - Loading'', ''Map View - Parking Position Determined'', and ''Feedback''. The first view, ''Map View - Loading'', is shown when the application is started. It shows a map with the current position of the user clearly marked and a button to initiate the determination of the parking position of the users car. The second view, ''Map View - Parking Position Determined'', is shown when the application successfully determined the parking position of the users car. It presents the determined position on a map together with the current position of the user. The view also shows detailed information about the determined position, such as the address, the relative altitude and the distance from the users current location to the determined parking position. The user can initiate from this view a third party navigation with directions to the determined car position and they can initiate the reporting of the accuracy of the determined parking position. The view ''Map View - Loading'' supports the user in reporting the determined parking position.
+
+To determine the parking position of a users car based on the analysis of their spatial trajectory, an algorithm is developed. This algorithm uses the users spatial trajectory. The trajectory is cleared from noise. Based on the stay points of the trajectory, it is cut into individual trips. These trips are individually evaluated for parking positions candidates of the users car. To determine a potential parking position in a trip, the transportation mode for each floating window segment set is evaluated using a machine learning model. The location where the user last stopped traveling by car in a trajectory is a potential parking position. The most recent of these potential parking positions is used as the determined parking position of the users car. 
+
+The developed algorithm to determine the parking position of a users car depends on a machine learning model to classify the transportation mode of a users trajectory. To create this model, data from the GeoLife project by Microsoft Asia is used. The data is prepared and cleaned. The features velocity, acceleration and bearing change are created for each individual segment of each trajectory. Aggregated featured, such as the minimum, the maximum, the range, the sum, the average, and the variance, are created based on the individual features for each floating window set of segments. Based on the created data set two machine learning models are trained: a Multilayered Perceptron Classifier, which is a class of neural networks, and a XGBoost Classifier, which is a greedy tree-boosting algorithm. 
+
+Based on the design, an application is implemented. The application is developed using the programming language Swift and runs exclusively on Apple iPhones. The application logs the spatial trajectory of the user and stores it locally on the phone using the database Realm. The designed algorithm to determine the parking position of the users car is implemented on device and is not dependent on any server structure. No private data, such as any location data, is send to any server element to ensure the privacy of the user. To be able to evaluate the accuracy of the determined parking position, the application enables the user to report the accuracy of the determined parking position to a MySQL server. All send information are shown to the user before they are send and they do not contain any sensitive data, such as the location data or any information that could be used to identify the user. 
+
+The outcome of the Bachelor thesis is evaluated in three ways. First, the performance of the trained machine learning models are compared. The Multilayer Perceptron classifier reaches an accuracy of 89.8\%. The XGBoost classifier reaches an accuracy of 90.48\%. The parameters for both classifiers are optimized using three-fold cross validation. The XGBoost classifier is used in the implementation of the application as it shows the better results. Second, the accuracy of the determined parking position is evaluated. Thirteen tests are performed by four people. The mean accuracy is 112.7 meters with a standard deviation of 81.78 meters. Third, the fulfillment of the defined requirement is evaluated. The implemented application fulfills all five functional requirements and 6.5 of the eight non functional requirements. 
+
 
 \section{Limitations}
+The second section, \textit{Limitations}, names and explains the limitations of the Bachelor thesis. 
 
-\begin{itemize}
-\item what is not considered in this thesis and why
-\end{itemize}
+The analysis of the problem is conducted using background interviews. During these background interviews, four people are interviewed. 
+
+The design of the user interface is developed using Think-Aloud interviews. In each iteration only one person is interviewed using this method. 
+
+The background interviews and the Think-Aloud are performed in an office environment and not in the environment the users would use an application to determine the parking position of their car.  
+
+For the classification of the transportation mode of the users spatial trajectory two machine learning models are trained. To find the best machine learning mode for this task, more models need to be trained.
+
+The classification can only distinguish between the two transportation modes walk and car. 
+
+The developed application is developed for Apple iPhones and cannot easily be adapted for Android devices. The designed approach of the application to determine the parking position of the users car can be used to implement an Android application. 
+
+For the evaluation of the accuracy of the determined parking position 13 data points are used. To get a more accurate evaluation of the accuracy, more tests have to be conducted. 
+
+

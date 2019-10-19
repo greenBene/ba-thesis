@@ -1,14 +1,14 @@
 \chapter{Analysis}
-In the second chapter, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of potential users of the application, which determines the parking position of a car. Based on the results of the interviews and the constraints of the Bachelor thesis, requirements are defined for the application.
-In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations, users have for the developed application.
-In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the background interviews and the constraints of the Bachelor thesis.
+In the third chapter, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of potential users for an application to determine the parking position of a car. Based on the results of the interviews and the constraints of the Bachelor thesis, requirements are defined for the application.
+In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations they have for an application to determine the parking position of their car.
+In the second section, \textit{Requirements}, the requirements of the application are defined based on the results of the background interviews and the constraints of the Bachelor thesis.
 
 \section{Background Interviews}
 In the first section, \textit{Background Interviews}, potential users are interviewed to identify the needs and expectations of  users of the developed application. It is argued, who the potential target audience is. To uniquely identify the questions of the interviews, a nomenclature is introduced. The answers of the participants to each question are summarised.
 
 To identify the needs and expectations of users, potential users are interviewed for background interviews. The background interviews are semi structured. All people who drive cars are potential users of the application. Because the application solves a specific problem which is applicable to most drivers, the target audience is not segmented into smaller groups. Four people are interviewed who are part of the target audience. The interviewed people are called participants. All participants volunteer for the interview without any extrinsic incentive, and agree to be recorded and quoted anonymously. \cite{Abras2004} \cite{wilson2013interview}
 
-The questions are identified with [Q.xx], where Q means question, the point separates the letter from the number and x is a number starting by 1. The brackets ''[]'' limit the term.
+To identify the questions a nomenclature is introduced. The questions are identified with [Q.xx], where Q means question, the point separates the letter from the number and x is a number starting at 01. The brackets ''[]'' limit the term.
 
 \paragraph{[Q.01] In which situations in your past could you not find your parked car?}
 The two most mentioned locations where users have troubled finding their car are big parking lots, mentioned by three of the four participants, and multi-storey parking lots, mentioned by two of the four participants.
@@ -19,8 +19,8 @@ When asked to describe their approach on finding their parked car if the exact l
 \paragraph{[Q.03] Please list the two or three features which are most important for you in an application, which helps you to find your parked car.}
 The two most important aspects of the application, each mentioned by two of the four participants, are the accuracy of the determined parking position and the functionality of the application without user input.
 
-\paragraph{[Q.04] How accurate to you expect the application to be?}
-All of the participants express that an accuracy of 10 meters is sufficient for the determined parking position. Only two of four participants express than an accuracy of 50 meters is sufficient.
+\paragraph{[Q.04] How accurate do you expect the application to be?}
+All of the participants express that an accuracy of 10 meters is sufficient for the determined parking position. Two of four participants express than an accuracy of 50 meters is sufficient.
 
 \paragraph{[Q.05] Which information should the application present to you?}
 All participants expect the application to show the position of their parked car. Two out of four participants also expect to see their current position and the position of their parked car on a map. 
@@ -31,8 +31,8 @@ Required manual user input or a complicated user interface would each prevent tw
 \paragraph{[Q.07] How do you feel about the application using your location data?}
 For three of the four participants the use of the location data is not an issue. The remaining participant accepts the usage of their location data, if the application is open about the use of the generated data. 
 
-\paragraph{[Q.08] Would it be reassuring for you to that no location data is send to the cloud? }
-All participant would find it reassuring if the location data is only used on the device itself, but for none of participants it a requirement. They would also use the application, if the data is uploaded and processed online. 
+\paragraph{[Q.08] Would it be reassuring for you to know that no location data is send to the cloud? }
+All participant would find it reassuring if the location data is only used on the device itself, but none of them sees it as a requirement. They would also use the application, if the data is uploaded and processed online. 
 
 \paragraph{[Q.09] Since when do you drive cars?}
 Two of the participants drive cars since eighth years. The other two participants drive since six and twelve years.
@@ -40,8 +40,8 @@ Two of the participants drive cars since eighth years. The other two participant
 \paragraph{[Q.10] How regularly do you drive cars?}
 Three of four participants drive currently only a few times a year by car. One participant drives weekly. Two of four mention they used to drive daily by car. The other two participants mention they used to drive by car monthly or weekly. 
 
-\paragraph{[Q.11] Did you use apps which help you to find your car before?}
-Only one of the four participants previously used an application to help them find their car before. This person used Google Maps.
+\paragraph{[Q.11] Did you use applications which help you to find your car before?}
+Only one of the four participants previously used an application to help them find their car. This person used Google Maps.
 
 \paragraph{[Q.12] Are you aware that Google Maps and Apple Maps offer a feature to help finding a parked car?}
 Only one of the participants is aware, that Google Maps and Apple Maps provide the functionality to assist in finding a users parked car. 
@@ -53,7 +53,7 @@ Two of the participant report that they drive most often in urban areas. The oth
 \section{Requirements}
 In the second section, \textit{Requirements}, the requirements of the application are defined, based on the results of the \textit{Background Interviews} and the constraints of the Bachelor thesis. The requirements are split into functional and non-functional requirements. A functional requirement ''specifies a function that a system or system component must be able to perform.''. A non-functional requirement is defined as a requirement which is not an functional requirements, such as data requirements, constraints and quality requirements. \cite{eide2005quantification}
 
-The requirements are uniquely identified with [XX.yy], where XX can either be RF and mean functional requirement, or be RN and mean non-functional requirement, yy is a number starting at 01 and the point separates the letters from the number. The brackets ''[]'' limit the term.  
+To identify the requirements a nomenclature is introduced. The requirements are uniquely identified with [XX.yy], where XX can either be RF and mean functional requirement, or be RN and mean non-functional requirement, yy is a number starting at 01 and the point separates the letters from the number. The brackets ''[]'' limit the term.  
 
 \subsection{Functional Requirements}
 
@@ -64,10 +64,10 @@ The parking position is determined by analysing the spatial trajectories of the 
 The parking position of the users car is presented on a map to enable the user to easily orientate themselves in the environment. The requirement is based on the users answers to [Q.05].
 
 \paragraph{[RF.03] The application presents the current position of the user on a map}
-The current user location is presented on a map to enable the user to orient themselves in their current environment. Thus, the heading of the user is also indicated. The requirement is based on the users answers to [Q.05].
+The current user location is presented on a map to enable the user to orient themselves in their current environment. The requirement is based on the users answers to [Q.05].
 
 \paragraph{[RF.04] The application presents detailed information about the determined parking position, namely the address, the distance from the current location and the relative altitude}
-The detailed information of the determined parking location are presented to the user to enable them to find the most fitting way to find to their parked car. With the address, the distance and the relative altitude they can determine if they can walk to the location or need to use a taxi or public transportation. The requirement is based on the users answers in the \textit{Background Interviews} in [Q.05].
+The detailed information of the determined parking location is presented to the user to enable them to find the most fitting way to find to their parked car. The requirement is based on the users answers in the \textit{Background Interviews} in [Q.05].
 
 \paragraph{[RF.05] The applications enables the user to report the accuracy of the determined parking position to the developer}
 To enable the user to report the accuracy of the determined parking position, a view is implemented to support the user in reporting the accuracy. The accuracy is defined as the distance between the determined parking position of the users car and the actual parking position. This requirement is necessary to enable the quantitative evaluation of the parking position accuracy. 
@@ -81,16 +81,16 @@ The applications user interface does not confuse the user and presents all optio
 To ensure the privacy of the users and to avoid collecting sensible information, the app does not send any location data to any server component of the implemented system. The requirement is based on the users answers to [Q.08].
 
 \paragraph{[RN.03] The application does not rely on manual user input for determining the parking position}
-The application can determine the parking position of the users car without the user needing to manually input any data, such as the parking position or the used transportation mode. The process to determine the parking position is fully automated. The requirement is necessary because of several users reporting in [Q.06] that manual user input would prevent them from using the application.
+The application can determine the parking position of the users car without the user needing to manually input any data, such as the parking position or the used transportation mode. The process to determine the parking position is fully automated. The requirement is necessary because of half of the users reporting in [Q.06] that manual user input would prevent them from using the application.
 
 \paragraph{[RN.04] The accuracy of the determined parking position is better than 50 meters}
 The accuracy, defined as the distance between the determined parking position of the users car and its actual parking position, is better than 50 meters. Users report the accuracy as one of the most important features of the application in [Q.03] and the majority agrees that an accuracy of better than 50 meters is sufficient in [Q.04]. 
 
-\paragraph{[RN.05] The application is developed to run on iOS 12}
-The application is developed to run on iPhones with the latest iPhone operating system iOS 12. The requirement is based on the constraints of the Bachelor thesis. 
+\paragraph{[RN.05] The application is developed to run on iOS 13}
+The application is developed to run on iPhones with the latest iPhone operating system iOS 13. The requirement is based on the constraints of the Bachelor thesis. 
 
 \paragraph{[RN.07] The application is functional on big parking lots}
-One of the most named location in [Q.01] where users had problems finding their parked car are big parking lots, such as in front of major supermarkets brands or furniture stores. Thus, the application needs to support the user in finding their parked car in this locations.
+One of the most named locations in [Q.01] where users had problems finding their parked car are big parking lots, such as in front of major supermarkets brands or furniture stores. Thus, the application needs to support the user in finding their parked car in this locations.
 
 \paragraph{[RN.08] The application is functional on multi-storey parking lots}
-The other most named location in [Q.01] where users had problems finding their parked car are multi-storey parking lots. Thus, the application needs to support the user in finding their parked car in this locations by providing data to determine the floor on which the car is parked. 
+The other most named location in [Q.01] where users had problems finding their parked car are multi-storey parking lots. Thus, the application needs to support the user in finding their parked car in this kind of location by providing data to determine the floor on which the car is parked. 

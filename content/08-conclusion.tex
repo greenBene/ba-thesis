@@ -1,16 +1,30 @@
 \chapter{Conclusion}
-
-What happens in this chapter?
+The eight chapter, \textit{Conclusion}, discusses the results of the Bachelor thesis and potential future work based on the Bachelor thesis. In the first section, \textit{Discussion of Results}, the results of the Bachelor thesis are discussed. In the second section, \textit{Future Work}, possible future works related to the Bachelor thesis are presented. 
 
 \section{Discussion of Results}
+In the first section, \textit{Discussion of Results}, the results of the Bachelor thesis are discussed.
 
-\begin{itemize}
-\item the conclusion is based on what you have said before (chapter \textit{Results}: Summary and Limitations)
-\item give your opinion on the facts
-\end{itemize}
+% Analysis
+
+The Bachelor thesis analyses the problem of finding a parked car. The conducted interviews show that people do experience the problem in real scenarios. Despite the fact that several solutions for this problem do exists, most of the interviewees are not aware of them. Also they expect an application to determine the parking position of a car automatically. Most of the comparable existing solutions do not offer this feature or offer the feature in a limited way by relying on external factors, such as a Bluetooth connection to the driven car. Thus the contribution of the Bachelor thesis to develop a system to determine the parking position of a users car based on the users spatial trajectory is relevant.
+
+% Design
+
+The developed algorithm to determine the parking position of a users car based on the spatial trajectory of the user does successfully determine the parking position with a mean accuracy of 112.7 meters. This accuracy is sufficient to help the user to determine the approximate location of their car but not the exact location. Deviation of the accuracy of the determined parking position indicates an unknown factor which affects the accuracy. As more than two thirds of the tests show an accuracy of 120 meters or better the algorithm still works as intended. 
+
+The approach of the transportation mode classification is a combination of the methods used by the most influential related works. It does not rely on post processing, such as other approaches do, and still shows a similar performance in classifying the transportation mode of a users trajectory. This shows, that, depending on the context, no post-processing is necessary to classify the transportation mode of a spatial trajectory and thus can be omitted.
+
+% Implementation
+
+The developed application successfully implements the designed algorithm to determine the parking position of a users car based on the spatial trajectory of the user. The application shows that the developed approach is sufficiently performant and accurate in real world scenarios and thus can be used in such environments. 
 
 \section{Future Work}
+In the second section, \textit{Future Work}, possible future works related to the Bachelor thesis are presented. 
 
-\begin{itemize}
-\item you may like to suggest something that could be developed from your work
-\end{itemize}
+The developed approach focuses on the transportation modes car and walk. Future work can use a similar approach for other transportation modes, such as bike, more suitable for other environments. The developed approach is adaptable for such changes. The biggest obstacle for a transportation mode change is the classification that needs to be adapted.
+
+To investigate further the usability of the developed algorithm to determine the parking position of a users car, the accuracy can be evaluated with more conditions being recorded. This could result in improvements in the algorithm itself or the used parameters. 
+
+Future research can also port the developed application to Android to make it available for a broader audience. This would allow a more diverse set of hardware which would allow the evaluation how much the used hardware influences the accuracy of the algorithm.
+
+
