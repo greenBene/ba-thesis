@@ -1,8 +1,8 @@
 \chapter{Design}
-The fourth chapter, \textit{Design}, presents the results of the user interface design, the created algorithm to determine the parking position of a user's car and the machine learning workflow applied. The first section, \textit{User Interface}, presents the four iterations of the user interface and explains the design decisions of the final user interface design. The second section, \textit{Determine the Parking Position}, describes the algorithm used to determine the parking position of an user's car based on their spatial trajectory. The third section, \textit{Machine Learning}, describes the process conducted to train a machine learning model that classifies the transportation mode of a spatial trajectory.
+The fourth chapter, \textit{Design}, presents the results of the user interface design, the created algorithm to determine the parking position of a user's car and the applied machine learning workflow. The first section, \textit{User Interface}, presents the four iterations of the user interface and explains the design decisions of the final user interface design. The second section, \textit{Determine the Parking Position}, describes the algorithm used to determine the parking position of an user's car based on their spatial trajectory. The third section, \textit{Transportation Mode Classification of Spatial Trajectories}, describes the process conducted to train a machine learning model that classifies the transportation mode of a spatial trajectory.
 
 \section{User Interface}
-The first section, \textit{User Interface}, presents the designed user interface. First, the four iterations and the changes between them are described. Second, the final user interface design is discussed with usability heuristics by Nielsen and Apple.
+The first section, \textit{User Interface}, presents the designed user interface. First, the four iterations and the changes between them are described. Second, the final user interface design is discussed by considering usability heuristics by Nielsen and Apple.
 
 \subsection{Iterations}
 In the first part, \textit{Iterations}, the different iterations of the user interface and their related Think-Aloud protocol results are presented. The full user interface of each iteration can be seen in Appendix \ref{appendix:userInterface}.
@@ -33,7 +33,7 @@ If the application fails to determine the parking position, a pop-up menu is sho
 
 On successful determination of the parking position, the view ''MapView - Determined Parking Postition'' (cp. Figure \ref{fig:i1-i2}) is shown. It shows a map with the user's location and the determined position of the user's car. The label of the user's car is clickable and opens ''MapView - Details''. 
 
-''MapView - Details'' (cp. Figure \ref{fig:i1-mv-details}) presents more details about the determined parking position. It presents the address where the car is parked, the distance to the user's car, the altitude difference between the user and the user's car and the floor of the parked car. Two buttons are presented: One button opens a third party navigation software to navigate to the determined location, and a button to initiate reporting the accuracy of the determined parking position of the car by opening the ''Feedback'' view.
+''MapView - Details'' (cp. Figure \ref{fig:i1-mv-details}) presents more details about the determined parking position. It presents the address where the car is parked, the distance to the user's car, the altitude difference between the user and the user's car and the floor of the parked car. Two buttons are presented: One button opens a third party navigation software to navigate to the determined location and the other button initiates the reporting of the accuracy of the determined parking position by opening the ''Feedback'' view.
 
 The ''Feedback'' (cp Figure \ref{fig:i1-feedback}) view presents the user instructions to report the accuracy of the determined parking position, the transmitted information and a button to report the information. When the button is clicked, the information is sent and the application returns to the previous view, ''MapView - Details''. The user can also go back to the previous screen without sending any information by using the ''Back'' button.
 
@@ -42,10 +42,10 @@ The Think-Aloud protocol shows two key findings. First, in the view ''MapView - 
 
 \paragraph{Second Iteration}
 
-In the second iteration of the user interface, the two problems of the first iteration are improved. The views ''MapView - Details'' and ''MapView - Parking Position Determined'' are merged. This change allows the user to see all details of the determined parking position directly. As the main view, ''MapView - Parking Position Determined'' (cp. Figure \ref{fig:i1-i2}), now shows a partly transparent white box. This element is also added to the ''MapView - Loading'' view to keep the user interface consistent. It contains a button to initiate the determination of the car manually. 
+In the second iteration of the user interface, the two problems of the first iteration are improved. The views ''MapView - Details'' and ''MapView - Parking Position Determined'' are merged. This change allows the user to see all details of the determined parking position directly. As the main view, ''MapView - Parking Position Determined'' (cp. Figure \ref{fig:i1-i2}), now shows a partly transparent white box. This element is also added to the ''MapView - Loading'' view to keep the user interface consistent. It contains a button to initiate the determination of the car. 
 In the new ''MapView - Parking Position Determined'' view, the call to action to give feedback is rephrased to ''Send Accuracy'' to better represent the kind of feedback that can be given. The headline of the ''Feedback'' (cp. Figure \ref{fig:i2-feedback}) view is changed accordingly. A pop-up window is introduced in the ''Feedback'' view to confirm the successful sending of the accuracy.
 
-The Think-Aloud protocol of the second iteration shows three key findings. First, the altitude in the view ''MapView - Parking Position Determined'' is understood as total altitude of the car, but it shows the relative altitude of the car compared to the current altitude of the user. Second, the user is unsure if the presented address is the address of the location of the car, but assumes so. Third, the user does not notice in the ''Feedback'' view that the accuracy is supposed to be reported at the actual parking position of the car.
+The Think-Aloud protocol of the second iteration shows three key findings. First, the altitude in the view ''MapView - Parking Position Determined'' is understood as the total altitude of the car, but it shows the relative altitude of the car compared to the current altitude of the user. Second, the user is unsure if the presented address is the address of the location of the car, but assumes so. Third, the user does not notice in the ''Feedback'' view that the accuracy is supposed to be reported at the actual parking position of the car.
 
 
 \begin{figure}[h]
@@ -87,8 +87,9 @@ The second part, \textit{Final User Interface}, discusses the final user interfa
     \label{fig:mv-loading}
 \end{figure}
 
-The application starts in the ''MapView - Loading'' view, shown in Figure \ref{fig:mv-loading}. The view consist of a map and a button to initiate the determination of the parking position of the user's car. The shown map supports the users to orientate themselves in their current environment by presenting their location on the map. Thus, the second heuristic from Nielsen, ''Match between system and the real world'', is implemented. The map is interactive and can be zoomed, moved and rotated. The button to determine the parking position of the user's car is placed on top of a white and partly transparent box to ensure a sufficient contrast between the map and the button. The design fulfils Apples design guidelines for MapKit\footnote{Apple Map Kit: \url{https://developer.apple.com/documentation/mapkit}, (online: accessed October 19, 2019) }. The basic design of a map with a white, partly transparent box is used for all of the applications views, except the ''Feedback'' view, to keep the design simple and consistent, according to Nielsens fourth and eight heuristics. \cite{nielsen1994usability} \cite{apple:interfaceguidliines}
+The application starts in the ''MapView - Loading'' view, shown in Figure \ref{fig:mv-loading}. The view consist of a map and a button to initiate the determination of the parking position of the user's car. The shown map supports the user to orientate themselves in their current environment by presenting their location on the map. Thus, the second heuristic from Nielsen, ''Match between system and the real world'', is implemented. The map is interactive and can be zoomed, moved and rotated. The button to determine the parking position of the user's car is placed on top of a white and partly transparent box to ensure a sufficient contrast between the map and the button. The design fulfils Apples design guidelines for MapKit\footnote{Apple Map Kit: \url{https://developer.apple.com/documentation/mapkit}, (online: last accessed October 19, 2019) }. The basic design of a map with a white, partly transparent box is used for all of the applications views, except the ''Feedback'' view, to keep the design simple and consistent, according to Nielsens fourth and eight heuristics. \cite{nielsen1994usability} \cite{apple:interfaceguidliines}
 
+\newpage
 
 \paragraph{MapView - Error}
 
@@ -99,7 +100,7 @@ The application starts in the ''MapView - Loading'' view, shown in Figure \ref{f
     \label{fig:mv-error}
 \end{figure}
 
-If the application fails to determine the parking position of the user's car, it shows the view ''MapView - Error'', shown in Figure \ref{fig:mv-error}. The view shows a map with the user's location. On the bottom, an error message is printed on top of a white, partly transparent box. The error message explains in an understandable way for the users, why the application failed to determine the parking position. Below the error text, a button is shown. When pressed, the application tries to determine the parking position again. With the understandable error message and the promoted button to retry, the application confirms to Nielsens ninth heuristic, ''Help users recognize, diagnose, and recover from errors''. \cite{nielsen1994usability}
+If the application fails to determine the parking position of the user's car, it shows the view ''MapView - Error'', shown in Figure \ref{fig:mv-error}. The view shows a map with the user's location. On the bottom, an error message is printed on top of a white, partly transparent box. The error message explains in an understandable way for the user, why the application failed to determine the parking position. Below the error text, a button is shown. When pressed, the application tries to determine the parking position again. With the understandable error message and the promoted button to retry, the application confirms to Nielsens ninth heuristic, ''Help users recognize, diagnose, and recover from errors''. \cite{nielsen1994usability}
 
 \paragraph{MapView - Parking Position Determined}
 
@@ -110,11 +111,9 @@ If the application fails to determine the parking position of the user's car, it
     \label{fig:mv-parking}
 \end{figure}
 
-The view ''MapView - Parking Position Determined'', shown in Figure \ref{fig:mv-parking}, is the main view of the application. It is shown when the application determined successfully the parking position of the user's car. A map and a partly transparent white box is shown. On the map, the user's current location and the position of the user's car are marked. The user's location is presented with a blue point. The location of the car is marked with a stylised car surrounded by a transparent circle. The car icon is on the exact location, the application determined as the parking position and the circle represents the accuracy of the determined parking location. The map view is chosen to match the system to the surroundings of the user. On the bottom of the screen, detailed information of the determined parking location are presented. The address, the distance to the current location, the relative altitude and the floor in which the car is parked are shown. Above the details, the headline ''Your car is parked at'' clearly identifies the listed information as related to the user's car. Three buttons are shown. The first button, in the upper right corner of the white box, refreshed the determined parking location. The second button, labelled ''Directions'', opens a third party navigation software to navigate to the determined location. Because navigation apps, such as Apple Maps and Google Maps, use the color blue to indicate a button which starts a navigation, the color blue is also chosen for the ''Directions'' button. The third button, labeled ''Report Accuracy'', initiates the process of reporting the accuracy of the determined parking location. The refresh button and the ''Report Accuracy'' button are both colored white to not draw extra attention to them. Most users should not need to use them on a regular base. \cite{nielsen1994usability}
-
+The view ''MapView - Parking Position Determined'', shown in Figure \ref{fig:mv-parking}, is the main view of the application. It is shown when the application determined successfully the parking position of the user's car. A map and a partly transparent white box are shown. On the map, the user's current location and the position of the user's car are marked. The user's location is presented with a blue point. The location of the car is marked with a stylised car surrounded by a transparent circle. The car icon is on the exact location, the application determined as the parking position and the circle represents the accuracy of the determined parking location. The map view is chosen to match the system to the surroundings of the user. On the bottom of the screen, detailed information of the determined parking location are presented. The address, the distance to the current location, the relative altitude and the floor in which the car is parked are shown. Above the details, the headline ''Your car is parked at'' clearly identifies the listed information as related to the user's car. Three buttons are shown. The first button, in the upper right corner of the white box, refreshes the determined parking location. The second button, labelled ''Directions'', opens a third party navigation software to navigate to the determined location. Because navigation apps, such as Apple Maps and Google Maps, use the color blue to indicate a button which starts a navigation, the color blue is also chosen for the ''Directions'' button. The third button, labeled ''Report Accuracy'', initiates the process of reporting the accuracy of the determined parking location. The refresh button and the ''Report Accuracy'' button are both colored white to not draw extra attention to them. Most users should not need to use them on a regular base. \cite{nielsen1994usability}
 
 \paragraph{Feedback}
-
 
 \begin{figure}[h]
   \centering
@@ -134,9 +133,9 @@ The view ''MapView - Parking Position Determined'', shown in Figure \ref{fig:mv-
   
 \end{figure}
 
-The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the user to report the accuracy of the determined parking location. This functionality enables the quantitative evaluation of the systems accuracy. The text in the upper half of the screen explains how to report the accuracy and what kind of data is transmitted. A complete list of the transmitted data is shown in the bottom half. The ''Back'' button in the upper left corner navigates the system back to the view ''MapView - Parking Position Determined'' without transmitting any data. The button on the bottom, labelled ''Report Accuracy'', brings up a pop up in which the user is asked, if they are at the location of the parked car (cp. Figure \ref{fig:feedback-con}). The instructions in the explaining text are often skimmed by the users, thus this second check is necessary to keep the reported accuracy usable. If the user confirms their location, the data is send and a confirmation is shown (cf. Figure \ref{fig:feedback-succ}). The view changes back to the ''MapView - Parking Position Determined'' view. If the user does not confirm their location, a pop up is shown (cp. Figure \ref{fig:feedback-fail}) which asks the user to report the accuracy at the location of their parked car. The ''Back'' button enables the user to be in control if they want to share any information. The confirmation dialog prevents users from accidental sending the accuracy at the wrong location. Thus, the view fulfills the third and fifth heuristic by Nielsen. \cite{nielsen1994usability}
+The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the user to report the accuracy of the determined parking location. This functionality enables the quantitative evaluation of the systems accuracy. The text in the upper half of the screen explains how to report the accuracy and what kind of data is transmitted. A complete list of the transmitted data is shown in the bottom half. The ''Back'' button in the upper left corner navigates the system back to the view ''MapView - Parking Position Determined'' without transmitting any data. The button on the bottom, labelled ''Report Accuracy'', brings up a pop-up window in which the user is asked, if they are at the location of the parked car (cp. Figure \ref{fig:feedback-con}). The instructions in the explaining text are often skimmed by the users, thus this second check is necessary to keep the reported accuracy usable. If the user confirms their location, the data is send and a confirmation is shown (cf. Figure \ref{fig:feedback-succ}). The view changes back to the ''MapView - Parking Position Determined'' view. If the user does not confirm their location, a pop up is shown (cp. Figure \ref{fig:feedback-fail}) which asks the user to report the accuracy at the location of their parked car. The ''Back'' button enables the user to be in control if they want to share any information. The confirmation dialog prevents the user from accidental sending the accuracy at the wrong location. Thus, the view fulfills the third and fifth heuristic by Nielsen. \cite{nielsen1994usability} \newpage
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
   \hfill
   \begin{minipage}[b]{0.49\textwidth}
@@ -154,11 +153,10 @@ The view ''Feedback'', shown in Figure \ref{fig:feedback}, enables the user to r
   \end{minipage}
 \end{figure}
 
-\section{Determination the Parking Position of a Car}
+\section{Determining the Parking Position of a Car}
 The algorithm to determine the parking position of a user's car (Source Code \ref{code:DetParkPos}) uses the heuristic that the user's car is parked where the user last traveled by car. To determine this location, the algorithm first removes the noise from the user's trajectory. The cleaned trajectory is segmented into individual trips based on the stay points of the trajectory. The trips are sorted from newest to oldest and examined for parking position candidates. The most recent of these candidates is returned as the determined parking position.
 
-
-The used algorithms in the parking position determination, namely the algorithms for noise removal, stay point detection, trip detection and parking position candidate detection are described in detail in the parts below.
+The algorithms applied in the parking position determination, namely the algorithms for noise removal, stay point detection, trip detection and parking position candidate detection are described in detail in the parts below.
 
 
 \begin{lstlisting}[style=py, caption={Pseudocode: Determine Parking Position Candidate}, label={code:DetParkPos}]
@@ -213,7 +211,7 @@ def compMeanCoord(coordinates):
 
 \subsection{Stay Point Detection}
 
-The stay point detection algorithm iterates through the trajectory and detects if the user stayed within a given threshold of distance longer than a given threshold of time. The time and distance thresholds are necessary, as otherwise the algorithm could detect a cluster of points on a area where the user frequently travels through, such as a major interception, but which has no further semantic meaning. The algorithm is mostly adapted from \cite{li2008mining}, but differs slightly. In the original algorithm, line 26 is right before the break command in line 22. This could lead to an infinity loop in which the variable i is never assigned a value greater than pointNum. \cite{li2008mining}
+The stay point detection algorithm iterates through the trajectory and detects if the user stayed within a given threshold of distance longer than a given threshold of time. The time and distance thresholds are necessary, as otherwise the algorithm could detect a cluster of points within an area where the user frequently travels through, such as a major interception, but which has no further semantic meaning. The algorithm is mostly adapted from \cite{li2008mining}, but differs slightly. In the original algorithm, line 26 is right before the break command in line 22. This could lead to an infinity loop in which the variable i is never assigned a value greater than pointNum. \cite{li2008mining}
 
 \begin{lstlisting}[style=py, caption={Pseudocode: Stay Point Detection \cite{li2008mining}}, label={code:stayPoint}]
 def detectStayPoints(trajectory, distTresh, timeTresh):
@@ -248,9 +246,9 @@ def detectStayPoints(trajectory, distTresh, timeTresh):
 
 
 \subsection{Trips}
-The classification of the transportation mode of a trajectory is only relevant for the segments where the user is significantly moving. Thus, only the trajectory segments between stay points are relevant. The segments at stay points can be ignored.
+The classification of the transportation mode of a trajectory is only relevant for the segments where the user is significantly moving. Thus, only the trajectory segments between stay points are of interest. The segments at stay points can be ignored.
 
-The algorithm (Source Code \ref{code:cutTrip}) segments the user's spatial trajectory into individual trips based on its stay points. It iterates through all stay points and selects the segments of the trajectory which are between the current and the following stay point. A segment is between two stay points if its timestamp is greater than or equal to the leave time of the start stay point and if the timestamp is smaller than or equal to the first timestamp after the user reaches the destination stay point. 
+The algorithm (Source Code \ref{code:cutTrip}) segments the user's spatial trajectory into individual trips based on its stay points. It iterates through all stay points and selects the segments of the trajectory which are between the current and the following stay point. A segment is between two stay points if its timestamp is greater than or equal to the time of leaving the start stay point and if the timestamp is smaller than or equal to the first timestamp after the user reaches the destination stay point. 
 
 \begin{lstlisting}[style=py, caption={Pseudocode: Determine Trips in a Trajectory}, label={code:cutTrip}]
 def cutIntoTrips(trajectory, stayPoints):
@@ -271,7 +269,7 @@ def cutIntoTrips(trajectory, stayPoints):
 
 \subsection{Determining Parking Position Candidate}
 
-To determine a parking position candidate, a heuristic is used: Wherever a user travelled by car last, the car is parked. As a trip is the movement from one stay point to the next one, the last occasion of a user traveling by car in a trip is a potential parking position candidate. To reduce false positive errors, the transportation mode needs to be classified consecutive as car movement for a defined threshold of occurrences. The algorithm used to determine a parking position candidate (Source Code \ref{code:ParkCandidate}) iterates reversed through the classified transportation mode labels of the spatial trajectory of a trip. The start point of the temporally last segment of the windows which are consecutively labeled car movement is returned as a parking position candidate. 
+To determine a parking position candidate, a heuristic is used: Wherever a user travelled by car last, the car is parked. As a trip is the movement from one stay point to the next one, the last occasion of a user traveling by car in a trip is a potential parking position candidate. To reduce false positive errors, the transportation mode needs to be classified consecutive as car movement for a defined threshold of occurrences. The algorithm used to determine a parking position candidate (Source Code \ref{code:ParkCandidate}) iterates reversed through the classified transportation mode labels of the spatial trajectory of a trip. The start point of the temporally last segment of the windows, which are consecutively labeled car movement, is returned as a parking position candidate. 
 
 \begin{lstlisting}[style=py, caption={Pseudocode: Determine Parking Position Candidate}, label={code:ParkCandidate}]
 def detParkingPosCandidate(trip, labels, car_window_size):
@@ -289,17 +287,17 @@ def detParkingPosCandidate(trip, labels, car_window_size):
 \end{lstlisting}
 
 \section{Transportation Mode Classification of Spatial Trajectories}
-The second section, \textit{Transportation Mode Classification of Spatial Trajectories}, describes the used process to train a machine learning model that determines the transportation mode of a spatial trajectory.
-The first part, \textit{Pre-processing}, describes the taken steps to clean and prepare the data of the geolife dataset.
-The second part, \textit{Feature Extraction}, names and defines all features generated based on the GeoLife dataset.
+The third section, \textit{Transportation Mode Classification of Spatial Trajectories}, describes the process applied to train a machine learning model that determines the transportation mode of a spatial trajectory.
+The first part, \textit{Pre-processing}, describes the steps taken to clean and prepare the data of the GeoLife data set.
+The second part, \textit{Feature Extraction}, names and defines all features generated based on the GeoLife data set.
 The third section, \textit{Data Validation}, validates the generated data.
 In the fourth part, \textit{Model Training}, the used machine learning models are presented and explained. 
 
 \subsection{Pre-processing}
 
-The GeoLife data set is created by Microsoft Research Asia in the context of the GeoLife project. It consist of spatial trajectories which are created by 182 users over five years. 69 of the users label their trajectories with the used transportation mode. The labels are saved in separate files. \cite{zheng2008understanding} \cite{zheng2010geolife} \cite{geolife-dataset} \cite{zheng2009mining}
+The GeoLife data set is created by Microsoft Research Asia in the context of the GeoLife project. It consists of spatial trajectories which are created by 182 users over five years. 69 of the users label their trajectories with the used transportation mode. The labels are saved in separate files. \cite{zheng2008understanding} \cite{zheng2010geolife} \cite{geolife-dataset} \cite{zheng2009mining}
 
-First, the trajectories of the users that labeled their transportation modes are joined with the reported transportation mode based on their timestamps. All trajectories without labels are discarded. Second, all transportation modes, which are not relevant for the context of this Bachelor thesis are discarded. Only the trajectories of the transportation mode ''car'' and ''walk'' are used.
+First, the trajectories of the users that labeled their transportation modes are joined with the reported transportation mode based on their timestamps. All trajectories without labels are discarded. Second, all transportation modes, which are not relevant for the context of this Bachelor thesis, are discarded. Only the trajectories of the transportation mode ''car'' and ''walk'' are used.
 
 \subsection{Feature Extraction}
 
@@ -338,9 +336,9 @@ There are two kinds of features: First, individual features based on one single 
 
 \subsubsection{Individual Features}
 
-\paragraph{Velocity} The velocity of a trajectory is the movement speed of the tracked object. It is defined as $v(p_n) = Dist(p_n, p_{n+1})/(t(p_{n+1}) - t(p_n))$ with $Dist$ as a function to calculate the the distance between two coordinates and $t$ being the function that returns the timestamp of a point of a trajectory. \cite{Zheng2008}
+\paragraph{Velocity} The velocity of a trajectory is the movement speed of the tracked object. It is defined as $v(p_n) = Dist(p_n, p_{n+1})/(t(p_{n+1}) - t(p_n))$ with $Dist$ as a function to calculate the distance between two coordinates and $t$ being the function that returns the timestamp of a point of a trajectory. \cite{Zheng2008}
 
-\paragraph{Acceleration} The acceleration of a trajectory is the increase or decrease of velocity in the given time. It is defines as $ a(p_n) = (v(p_{n+1}) - v(p_n))/(t(p_{n+1}) - t(p_n))$. \cite{Zheng2008}
+\paragraph{Acceleration} The acceleration of a trajectory is the increase or decrease of velocity in the given time. It is defined as $ a(p_n) = (v(p_{n+1}) - v(p_n))/(t(p_{n+1}) - t(p_n))$. \cite{Zheng2008}
 
 \paragraph{Bearing Change} Bearing is a measure for the angle between the direction a trajectory is heading and a reference, such as the magnetic or true north. The bearing change is the absolute change of the bearing between two consecutive coordinates. It is defined as $ brCh(p_n) = 180 - | |brgn(p_n) - brng(p_{n+1})
 | - 180| $ with $brng$ as the function that returns the bearing of the segment. \cite{Dabiri2018} Bearing is defined as
@@ -352,7 +350,7 @@ There are two kinds of features: First, individual features based on one single 
 \end{align*}
 
 \subsubsection{Aggregated Features}
-The aggregation functions are applied to all three individual features. Thus, the aggregation features are describes for the generic set $X$.
+The aggregation functions are applied to all three individual features. Thus, the aggregation features are described for the generic set $X$.
 
 \paragraph{Maximum} The maximum of a set is the greatest value in the set. It is defined as $ \max (X) = \max(x \in X)$.
 
@@ -360,17 +358,17 @@ The aggregation functions are applied to all three individual features. Thus, th
 
 \paragraph{Range} The range of a set is the difference between its minimum and its maximum. It is defined as $ range(X) = max(X) - min(X)$.  
 
-\paragraph{Sum} The sum of a set is the sum of its elements. It is defined as $sum(X) = \sum_{x\in X} (x)$
+\paragraph{Sum} The sum of a set is the sum of its elements. It is defined as $sum(X) = \sum_{x\in X} (x)$.
 
 \paragraph{Mean} The mean value of a set is the sum of all its elements divided by the number of elements of the set. It is defined as $ mean (x) = sum(X)/|X|$.
 
-\paragraph{Variance} The variance of a set it the squared deviation of the sets mean. It is defined as $var (X) = \sum_{x\in X} (x - mean(X))^2/|X| $.
+\paragraph{Variance} The variance of a set it the squared deviation of the set's mean. It is defined as $var (X) = \sum_{x\in X} (x - mean(X))^2/|X| $.
 
-All aggregated features are generated for each kind of individual feature. Thus, for each moving window with three segments, 9 individual features and 18 aggregated features are defined. 
+All aggregated features are generated for each kind of individual feature. Thus, for each moving window with three segments, nine individual features and 18 aggregated features are defined. 
 
 \subsection{Data Validation}
 
-To ensure no invalid data is used for the classification of the machine learning model, the data is cleaned using thresholds for speed and acceleration based on the transportation mode of the given moving window set. The thresholds are adapted from \cite{Dabiri2018} and can be seen in Table \ref{table:thresholds}.
+To ensure that no invalid data is used for the classification of the machine learning model, the data is cleaned using thresholds for speed and acceleration based on the transportation mode of the given moving window set. The thresholds are adapted from \cite{Dabiri2018} and can be seen in Table \ref{table:thresholds}.
  
 \begin{table}[h!]
     \centering
@@ -394,7 +392,7 @@ All trips with segments that violate the defined thresholds are discarded.
 In the fourth part, \textit{Model Training}, the used machine learning models are presented and explained. First, \textit{Multilayer Perceptron} is presented. Second, \textit{XGBoost} is presented. 
 
 \subsubsection{Multilayer Perceptron}
-Multilayer Perceptron is a class of feedforward neural networks. They consist of at least three layers: the input layer, the hidden layers and the output layer. It can be depicted as a diagram, as show in Figure \ref{fig:mlp-struc}. This figure shows the input layer X of size P, one hidden layer Y of size M and the output layers Y of size K. Each node of a layer is connected to each of the nodes of the following layer. For the input data, a activation function is used. This function is often sigmoid $\sigma(v) = 1/(1+e^{-v})$. \cite{hastie2005elements}
+Multilayer Perceptron is a class of feedforward neural networks. They consist of at least three layers: the input layer, the hidden layers and the output layer. It can be depicted as a diagram, as shown in Figure \ref{fig:mlp-struc}. This figure illustrates the input layer X of size P, one hidden layer Y of size M and the output layer Y of size K. Each node of a layer is connected to each of the nodes of the following layer. For the input data, an activation function is used. This function is often sigmoid $\sigma(v) = 1/(1+e^{-v})$. \cite{hastie2005elements}
 
 \begin{figure}[h]
     \centering
@@ -409,13 +407,13 @@ The neural network has unknown parameters, called weights. For each connection b
     R(\Theta)=-\sum_{i=1}^N\sum_{k=1}^K y_{ik} \log f_k(x_i)
 \end{align}{}
 
-For the classification of the transportation mode 27 features are generated. Thus, the Multilayer Perceptron classifier has 27 input nodes. The trained model can classify the two transportation modes walk and car. Thus, the classifier has two output layer nodes, one for each class to predict. 
+For the classification of the transportation mode, 27 features are generated. Thus, the Multilayer Perceptron classifier has 27 input nodes. The trained model can classify the two transportation modes walk and car. Thus, the classifier has two output layer nodes, one for each class to predict. 
 
 
 \subsubsection{XGBoost}
-XGBoost is a scalable tree boosting system. Since its release it is successfully used in a number of machine learning competitions. Its success is mainly caused by its scalability. The scalability is due to a number of ''important systems and algorithmic optimizations''. Namely these include a novel tree learning algorithm which can handle sparse data and also the introduction of approximate tree learning in its system. Due to this changes, the XGBoost ''runs more than ten times faster than existing popular solutions on a single machine''.  \cite{chen2016xgboost}
+XGBoost is a scalable tree boosting system. Since its release, it is successfully used in a number of machine learning competitions. Its success is mainly caused by its scalability. The scalability is due to a number of ''important systems and algorithmic optimizations''. Namely, these include a novel tree learning algorithm that can handle sparse data and also the introduction of approximate tree learning in its system. Due to this changes, the XGBoost ''runs more than ten times faster than existing popular solutions on a single machine''.  \cite{chen2016xgboost}
 
-The basic algorithm of XGBoost is similar to other gradient boosting tree ensemble systems (Source Code \ref{code:xgboost}). The system iteratively tries to find the best decision tree for the given data, adds the created decision tree to a set of decision trees and increases the importance of the misclassified examples. In the following iteration, the system tries to find again the best decision tree, but because of the increased importance of the previously misclassified exampled, these are more strongly considered. The algorithm stops if the maximum of allowed trees are generated. To classify an entry with the generated model, the entry is classified by each of the generated trees and their results are combined. \cite{chen2016xgboost}
+The basic algorithm of XGBoost is similar to other gradient boosting tree ensemble systems (Source Code \ref{code:xgboost}). The system iteratively tries to find the best decision tree for the given data, adds the created decision tree to a set of decision trees and increases the importance of the misclassified examples. In the following iteration, the system tries to find again the best decision tree, but due to the increased importance of the previously misclassified examples, these examples are more strongly considered. The algorithm stops if the maximum of allowed trees is generated. To classify an entry with the generated model, the entry is classified by each of the generated trees and their results are combined. \cite{chen2016xgboost}
 
 \begin{lstlisting}[style=py, caption={Pseudocode: Basic XGBoost}, label={code:xgboost}]
 def xgboostClassifyer(data, labels, maxTrees):
@@ -430,7 +428,7 @@ def xgboostClassifyer(data, labels, maxTrees):
     return trees
 \end{lstlisting}
 
-To generate the individual decision trees, several splits need to be chosen. The possible splits can be evaluated by a loss function. In XGBoost this loss function is based on the difference between the prediction and target values of a split, and on the complexity of the model. The exact greedy algorithm is powerful in finding the next optimal split, because it iterates over all possible next splits. The downside of the algorithm is that its performance suffers if the given data does not fits completely into the memory. To enable an efficient computation in this case, XGBoost implements an approximation algorithm for the split finding. \cite{chen2016xgboost}
+To generate the individual decision trees, several splits need to be chosen. The possible splits can be evaluated by a loss function. In XGBoost, this loss function is based on the difference between the prediction and target values of a split, as well as on the complexity of the model. The exact greedy algorithm is powerful in finding the next optimal split because it iterates over all possible next splits. The downside of the algorithm is that its performance suffers if the given data does not fits completely into the memory. To enable an efficient computation in this case, XGBoost implements an approximation algorithm for the split finding. \cite{chen2016xgboost}
 
 The approximate algorithm for split finding (Source Code: \ref{code:xgboost_approx}) proposes splits for a percentile of each of the m features. The continuous features are sorted into buckets splits based on the generated candidate splits. The best solution among the proposed ones is aggregated. To calculate the score for each split, the algorithm uses the loss function of XGBoost, which is represented by the first and second order gradient statistics $g_j \in G$ and $h_j \in H$. 
 
