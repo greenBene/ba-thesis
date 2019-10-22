@@ -1,44 +1,40 @@
 \chapter{Implementation}
-Th fifth chapter, \textit{Implementation}, describes the actual implementation of the training of the machine learning model used for classifying the transportation of the user and of the application to determine the parking position of the users car. 
+Thr fifth chapter, \textit{Implementation}, describes the actual implementation of the training of the machine learning model used for classifying the transportation of the user and of the application to determine the parking position of the user's car. 
 In the first section, \textit{Architecture}, the architecture of the developed system is presented and explained.
-In the second section, \textit{Technologies}, presents the technologies used in the implementation of the system.
+The second section, \textit{Technologies}, presents the technologies used in the implementation of the system.
 In the third section, \textit{Details of Implementation}, several noteworthy code excerpts of the application, the implementation of the machine learning workflow and the server component are presented.
 
 \section{Architecture}
-In the first section, \textit{Architecture}, the architecture of the developed system is presented and discussed.
-
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{images/architecture.png}
-    \caption{Architecture of developed system}
+    \caption{Architecture of Developed System}
     \label{fig:architecture}
 \end{figure}
 
 
-The system is centered around the developed mobile application. Figure \ref{fig:architecture} visualized the architecture and the arrows represent the data flow.  The mobile application consist of four components: the user interface, the logging of  the users trajectory, the determination the parking position of the users car and the reporting of the accuracy. The user interface presents all necessary data to the user and the user can perform actions through it. The component that logs the user trajectory saves the coordinates of the user together with the current timestamp of the coordinates and other meta information in a database on the phone. The component that determined the parking position of the users car reads the logged trajectory of the user and performs the determination algorithm completely on device. The user can proactively report the accuracy of the determined parking position using the corresponding component. This component sends the accuracy and other meta data, but no sensitive data such as any actual location, to the server component. The server component consist of a small API which accepts the data send by the mobile application and stores it in a database.
+The system is centered around the developed mobile application. Figure \ref{fig:architecture} visualized the architecture. The arrows represent the data flow.  The mobile application consist of four components: the user interface, the logging of  the user's trajectory, the determination the parking position of the user's car and the reporting of the accuracy. The user interface presents all necessary data to the user and the user can perform actions through it. The component that logs the user's trajectory saves the coordinates together with the current timestamp of the coordinates and other meta information in a database on the phone. The component that determined the parking position of the user's car reads the logged trajectory of the user and performs the determination algorithm completely on device. The user can proactively report the accuracy of the determined parking position using the corresponding component. This component sends the accuracy and other meta data, but no sensitive data such as any actual location, to the server component. The data is securely transmitted via the HTTPS protocol. The server component consist of an API which accepts the data send by the mobile application and stores it in a database.
 
 \section{Technologies}
-In the second section, \textit{Technologies}, presents the technologies used for the implementation of the system.
 
-\paragraph{Swift} Swift\footnote{Swift: \url{https://swift.org/about/}, (last accessed October 8, 2019)} is a general-purpose language develooped by Apple Inc and since 2015 open source. It is mainly developed to be used on Apples platforms iOS, macOS, iPadOS, watchOS and tvOS, but can be used on other platforms too. Its design focus are safety, performance and expressiveness. It implements these by the avoidance of null values, direct compilation for each platform and a strict syntax. \cite{apple:swift}
+\paragraph{Swift} Swift\footnote{Swift: \url{https://swift.org/about/}, (online: last accessed October 19, 2019)} is a general-purpose language developed by Apple Inc and since 2015 open source. It is mainly developed to be used on Apple's platforms iOS, macOS, iPadOS, watchOS and tvOS, but can be used on other platforms too. Its design focus are safety, performance and expressiveness. It implements these by the avoidance of null values, direct compilation for each platform and a strict syntax. \cite{apple:swift}
 
-\paragraph{Alamofire} Alamofire\footnote{Alamofire: \url{https://github.com/Alamofire/Alamofire}, (last accessed October 8, 2019)} is an HTTP networking library. It is written in Swift. In the Bachelor thesis it is used to report the accuracy of the determined parking position to the server component. \cite{alamofire}
+\paragraph{Alamofire} Alamofire\footnote{Alamofire: \url{https://github.com/Alamofire/Alamofire}, (online: last accessed October 19, 2019)} is an HTTP networking library. It is written in Swift. In this Bachelor thesis it is used to report the accuracy of the determined parking position to the server component. \cite{alamofire}
 
-\paragraph{Realm Database} Realm Database\footnote{Realm Database: \url{https://realm.io/products/realm-database/}, (last accessed October 8, 2019)} is an open source database management system with an focus on mobile platforms. Its core is written in C++ which enables a high performance. It can perform more than twice as many queries per second than the native solution of iOS called Core Data.  Realm Database is used in the application to store the trajectory of the user on device. \cite{realm}
+\paragraph{Realm Database} Realm Database\footnote{Realm Database: \url{https://realm.io/products/realm-database/}, (online: last accessed October 19, 2019)} is an open source database management system with a focus on mobile platforms. Its core is written in C++ which enables a high performance. It can perform more than twice as many queries per second than the native solution of iOS called Core Data\footnote{Core Data: \url{https://developer.apple.com/documentation/coredata}, (online: accessed October 19, 2019)}.  Realm Database is used in the application to store the trajectory of the user on device. \cite{realm}
 
-\paragraph{Jupyter Notebook} Jupyter Notebook\footnote{Jupyter Notebook: \url{https://jupyter.org/}, (last accessed October 8, 2019)} is an open-source web application that provides an environment to write code in a live context for a variety of languages and to present the code and its computational results. Jupyter Notebook is used in the Bachelor thesis to imlement the machine learning traingin \cite{jupyter}
+\paragraph{Jupyter Notebook} Jupyter Notebook\footnote{Jupyter Notebook: \url{https://jupyter.org/}, (online: last accessed October 19, 2019)} is an open-source web application that provides an environment to write code in a live context for a variety of languages and to present the code and its computational results. Jupyter Notebook is used in this Bachelor thesis to implement the machine learning training \cite{jupyter}
 
-\paragraph{Node.js} Node.js\footnote{Node.js: \url{https://nodejs.org/en/about/}, (last accessed October 8, 2019)} is a asynchronous event-driven JavaScript runtime. It is used to build network applications. In the Bachelor thesis it is used to build the server component of the accuracy reporting. \cite{node}
+\paragraph{Node.js} Node.js\footnote{Node.js: \url{https://nodejs.org/en/about/}, (online: last accessed October 19, 2019)} is a asynchronous event-driven JavaScript runtime. It is used to build network applications. In this Bachelor thesis it is used to build the server component of the accuracy reporting. \cite{node}
 
-\paragraph{scikit-learn} Scikit-learn\footnote{Scikit-learn: \url{https://scikit-learn.org/stable/}, (last accessed October 8, 2019)} is a Python model which implements a variety of machine learning algorithms. The Bachelor Thesis uses Scikit-learns implementation of XGBoost and Multylayer Perceptron to classify the transportation modes of a users spatial trajectory. \cite{scikit-learn}
+\paragraph{scikit-learn} Scikit-learn\footnote{Scikit-learn: \url{https://scikit-learn.org/stable/}, (online: last accessed October 19, 2019)} is a Python library which implements a variety of machine learning algorithms. This Bachelor thesis uses Scikit-learns implementation of XGBoost and Multylayer Perceptron Neural Networks to classify the transportation modes of a users spatial trajectory. \cite{scikit-learn}
 
 \section{Details of Implementation}
-In the third section, \textit{Details of Implementation}, several noteworthy code excerpts of the application, the implementation of the machine learning workflow and the server component are presented.
 
-The application is implemented for iPhones running the operating system iOS 13, the machine learning model training is implemented using Jupyter Notebooks and the server component is implemented using Node.js. All source code can be found in their repositories\footnote{Repository of implemented machine learning notebooks: \url{https://github.com/greenBene/ba-ml-model}, (last accessed October 8, 2019)}\footnote{Repository of implemented application: \url{https://github.com/greenBene/ba-parking-position-determination/}, (last accessed October 8, 2019)}\footnote{Repository of implemented server: \url{https://github.com/greenBene/ba-server}, (last accessed October 8, 2019)}.
+The application is implemented for iPhones running the operating system iOS 13, the machine learning model training is implemented using Jupyter Notebooks and the server component is implemented using Node.js. All source code can be found in their repositories\footnote{Repository of implemented machine learning notebooks: \url{https://github.com/greenBene/ba-ml-model}, (online: last accessed October 19, 2019)} \footnote{Repository of implemented application: \url{https://github.com/greenBene/ba-parking-position-determination/}, (online: last accessed October 19, 2019)} \footnote{Repository of implemented server: \url{https://github.com/greenBene/ba-server}, (online: last accessed October 19, 2019)}.
 
-Figure \ref{fig:ui} shows the three main views of the application. The left view presents the view the user sees when they start the application. It shows the current position of the user on a map and a button to initiate the determination of the parking position. The middle view presents the status of the application if a parking position is determined. It shows the location of the car and the location of the user on a map. Also, it presents more detailed information about the location of the car, such as the address where it is parked and the relative distance and altitude between the users location and the determined parking position. If data regarding the floor of the car is available, it is shown too. The user can trigger three actions via buttons on this screen. First, they can start a navigation towards the position of the users car in the the standard navigation software Apple Maps. Second, they can go back to the previous screen, Map View - Loading, via the reverse button. Third, they can report the accuracy of the application. The right view shows the interface of the application when the user initiated the reporting of the accuracy. An explaining text and the shared information are presented in the view. The user can report the shown data using the button on the bottom. 
+Figure \ref{fig:ui} shows the three main views of the application. The left view presents the view the user sees when they start the application. It shows the current position of the user on a map and a button to initiate the determination of the parking position. The middle view presents the status of the application if a parking position is determined. It shows the location of the car and the location of the user on a map. Also, it presents more detailed information about the location of the car, such as the address where it is parked and the relative distance and altitude between the user's location and the determined parking position. If data regarding the floor of the car is available, it is shown too. The user can trigger three actions via buttons on this screen. First, they can start a navigation towards the position of the user's car in the the standard navigation software Apple Maps. Second, they can go back to the previous screen, ''Map View - Loading'', via the reverse button. Third, they can report the accuracy of the application. The right view shows the interface of the application when the user initiated the reporting of the accuracy. An explaining text and the shared information are presented in the view. The user can report the shown data using the button on the bottom. 
 
 \begin{figure}[h!]
 \begin{minipage}{.33\textwidth}
@@ -53,12 +49,12 @@ Figure \ref{fig:ui} shows the three main views of the application. The left view
   \centering
   \includegraphics[width=.9\linewidth]{images/App/feedback.png}
 \end{minipage}
-\caption{The three main views of the implemented application. MapView - Loading (left), MapView - Parking Position Determined (middle), and Report Accuracy (right).}
+\caption{The Three Main Views of the Implemented Application. MapView - Loading (left), MapView - Parking Position Determined (middle), and Report Accuracy (right).}
 \label{fig:ui}
 \end{figure}
 \newpage
 
-\paragraph{Train XGBoost Classifier} Source Code \ref{code:xgb_train} shows the implementation of the training of the XGBoost classifier. First, a XGBClassifier object is created and possible parameters are defined in a dictionary. These parameters are chosen because they show the best results in several trials using the using three-fold cross-validated. The model is then trained for all possible combinations of the parameter space and the best model is chosen. 
+\paragraph{Training of XGBoost Classifier} Source Code \ref{code:xgb_train} shows the implementation of the training of the XGBoost classifier. First, a XGBoost classifier object is created and possible parameters are defined in a dictionary. These parameters are chosen because they show the best results using three-fold cross-validation. The model is then trained for all possible combinations of the parameter space and the best model is chosen. 
 
 \begin{lstlisting}[style=py, caption={Train XGBoost Classifier}, label={code:xgb_train}]
 xgb = XGBClassifier()
@@ -81,9 +77,9 @@ print('Best parameters found:\n', clf.best_params_)
 \end{lstlisting}{}
 
 
-\paragraph{Determine Parking Position Algorithm Implementation} Source Code \ref{code:detParkPosImpl} shows the implementation of the algorithm to determine the parking position of a users car. The whole trajectory of the user is loaded and the noise of the sensors is removed. The cleaned trajectory is cut into trips based on the stay points of the user. These trips are then labeled with their transportation modes and based on this, parking position candidates are computed. The most recent candidate is returned as the parking position.
+\paragraph{Determine Parking Position Algorithm Implementation} Source Code \ref{code:detParkPosImpl} shows the implementation of the algorithm to determine the parking position of the user's car. The whole trajectory of the user is loaded and the noise of the sensors is removed. The cleaned trajectory is cut into trips based on the stay points of the user. These trips are then labeled with their transportation modes and based on this, parking position candidates are computed. The most recent candidate is returned as the parking position.
 
-\begin{lstlisting}[style=swift, caption={Determine Parking Position Algorithm Implementation}, label={code:detParkPosImpl}]
+\begin{lstlisting}[style=swift, caption={Implementation of Algorithm to Determine Parking Position of the User's Car}, label={code:detParkPosImpl}]
 func determineParkingPosition() throws -> (CLLocation, [StayPoint]){
         // Load trajectory
         var trajectory = loadTrajectory()
@@ -118,7 +114,7 @@ func determineParkingPosition() throws -> (CLLocation, [StayPoint]){
 \end{lstlisting}
 
 \paragraph{Determine Stay Points - Implementation}
-Source Code \ref{code:detStayPointsImpl} shows the implementation of the stay point detection. This algorithm is adapted in most parts form \cite{li2008mining} but it is changed in two places. First, as mention in the fourth chapter \textit{Design}, the original algorithm has an potential infinity loop. This is fixed my moving the line i = j from the original line 25 to line 36. Also, when the algorithm finished, the last potential start of a stay point is also added to the list of stay points. This is implemented so that also the most recent trip can be used for determining the packing position of a car. 
+Source Code \ref{code:detStayPointsImpl} shows the implementation of the stay point detection. This algorithm is adapted in most parts from \cite{li2008mining} but it is changed in two places. First, as mention in the fourth chapter, \textit{Design}, the original algorithm has an potential infinity loop. This is fixed my moving the line i = j from the original line 25 to line 36. Also, when the algorithm finished, the last potential start of a stay point is also added to the list of stay points. This is implemented so that also the most recent trip can be used for determining the parking position of a car. 
 
 \begin{lstlisting}[style=swift, caption={Determine Stay Points - Implementation}, label={code:detStayPointsImpl}]
 private func getStayPoints(locations: [CLLocation], distThresh: Double, timeThresh:Double) -> [StayPoint] {
@@ -168,10 +164,10 @@ private func getStayPoints(locations: [CLLocation], distThresh: Double, timeThre
     }
 \end{lstlisting}{}
 
-\paragraph{Server: Handling of Reported Accuracy} Source Code \ref{code:server} shows the function of the server that handles all incoming reports of accuracy. First, it parses the incoming message and retrieves the transmitted values. Second, it ensures that all of the necessary values are set. Third, if the data is valid, it inserts the values into a table of a MySQL database. After the successful insertion or after any error, the server sends an appropriate HTTP code to the client.
+\paragraph{Server: Handling of Reported Accuracy} Source Code \ref{code:server} shows the function of the server that handles incoming reports of accuracy. First, it parses the incoming message and retrieves the transmitted values. Second, it ensures that the necessary values are set. Third, if the data is valid, it inserts the values into a table of a MySQL database. After the successful insertion or after any error, the server sends an appropriate HTTP code to the client.
 
 
-\begin{lstlisting}[style=JavaScript, caption={Server: Handling of reported accuracy}, label={code:server}]
+\begin{lstlisting}[style=JavaScript, caption={Server: Handling of Reported Accuracy}, label={code:server}]
 app.post("/post", function(req, res){
   var body = req.body;
 

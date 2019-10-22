@@ -1,20 +1,18 @@
 \chapter{Evaluation}
-The sixth chapter, \textit{Evaluation}, evaluates the results of the Bachelor thesis. In the first section,  
-\textit{Evaluation of Machine Learning Models}, the performance of the trained machine learning models is compared. In the second section, \textit{Accuracy of Determined Parking Position}, the accuracy of the determined parking position is evaluated. In the third section, \textit{Fulfillment of Requirements}, the fulfilment of the defined requirements is discussed and evaluated.
+The sixth chapter, \textit{Evaluation}, evaluates the results of this Bachelor thesis. In the first section,  
+\textit{Evaluation of Machine Learning Models}, the performance of the trained machine learning models is compared. In the second section, \textit{Accuracy of Determined Parking Position}, the accuracy of the determined parking position is evaluated. In the third section, \textit{Fulfillment of Requirements}, the fulfillment of the defined requirements is discussed and evaluated.
 
 \section{Evaluation of Machine Learning Models}
-The first section, \textit{Evaluation of Machine Learning Models}, evaluates the trained machine learning models.
-
-To find a machine learning model that classifies the transportation modes of a users spatial trajectory, two models are trained. The parameters of both models are tuned by using the three-fold Cross-Validation. 
+To find a machine learning model that classifies the transportation modes of a user's spatial trajectory, two models are trained. The parameters of both models are tuned by using the three-fold Cross-validation. The results of the model training are presented using the precision, the recall, the f1-score and the support.
 
 The final parameters for the XGBoost Classifier are as follows: \linebreak objective = binary:logistic, learning\_rate = 0.2, max\_depth= 10, min\_child\_weight = 8, subsample = 0.4, and n\_estimators = 30. With these parameters the trained model reaches an accuracy of 90.486\%. The precision, recall and f1 score differs 
-between the to classes as seen in Table \ref{table:xgb_eval}. 
+between the two classes as seen in Table \ref{table:xgb_eval}. 
 
 % XGBOOST
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|l|l|} \toprule
-        class & precision & recall & f1-score & support \\ \midrule
+        class & precision & recall & f1-score & Number of Instances \\ \midrule
         car & 0.95 & 0.78 & 0.86 & 121972 \\
         walk & 0.89 & 0.97 & 0.93 & 208984 \\ \bottomrule 
     \end{tabular}
@@ -22,13 +20,13 @@ between the to classes as seen in Table \ref{table:xgb_eval}.
     \label{table:xgb_eval}
 \end{table}{}
 
-The final parameters for the Multilayer Perceptron Classifier are as follows: \linebreak hidden\_layer\_sizes =  (20,20,20,20), activation= relu, solver = adam, alpha = 0.0025, learning\_rate = adaptive, and max\_iter = 200. The trained model reaches an accuracy of 89.837\%. Again, the  precision, recall and f1 score differs between the to classes as seen in Table \ref{table:mlp_eval}.
+The final parameters for the Multilayer Perceptron Classifier are as follows: \linebreak hidden\_layer\_sizes =  (20,20,20,20), activation= relu, solver = adam, alpha = 0.0025, learning\_rate = adaptive, and max\_iter = 200. The trained model reaches an accuracy of 89.837\%. Again, the  precision, recall and f1 score differs between the two classes as seen in Table \ref{table:mlp_eval}.
 
 % XGBOOST
 \begin{table}[h!]
     \centering
     \begin{tabular}{|l|l|l|l|l|} \toprule
-        class & precision & recall & f1-score & support \\ \midrule
+        class & precision & recall & f1-score & Number of Instances \\ \midrule
         car & 0.96 & 0.76 & 0.85 & 121972 \\
         walk & 0.87 & 0.98 & 0.92 & 208984 \\ \bottomrule 
     \end{tabular}
@@ -36,12 +34,11 @@ The final parameters for the Multilayer Perceptron Classifier are as follows: \l
     \label{table:mlp_eval}
 \end{table}{}
 
-As the XGBoost Classifier shows the better accuracy, this classifier is chosen over the Multilayer Perceptron Classifier for determining the transportation mode of a spatial trajectory. Noteworthy is the similarity between the results of both classifier. Not only does the total accuracy differs by less than 1\%, but also the precision recall and f1-score of the individual classes each differ at a maximum of 2\%.
+As the XGBoost classifier shows the better accuracy, this classifier is chosen over the Multilayer Perceptron classifier for determining the transportation mode of a spatial trajectory. Noteworthy is the similarity between the results of both classifier. Not only does the total accuracy differ by less than 1\%, but also the precision, recall and f1-score of the individual classes each differs at a maximum of 2\%.
      
 \section{Accuracy of Determined Parking Position}
-The second section, \textit{Accuracy of Determined Parking Position}, evaluates the accuracy of the determined parking position. 
 
-To evaluate the accuracy of the determined parking position, users are asked to report the accuracy of the determined position while using the application in real world scenarios. The accuracy is defined as the distance between the determined parking position and the position at which the car is actually parked. To support the users in this task, the application lets the users report the accuracy via the app. For this, the user is asked to initiate the reporting of the accuracy, when they arrive at their parked car. The accuracy is then automatically determined by calculating the distance between the users current location and the location the application determined as parking location.
+To evaluate the accuracy of the determined parking position, users are asked to report the accuracy of the determined position while using the application in real world scenarios. The accuracy is defined as the distance between the determined parking position and the position at which the car is actually parked. To support the user in this task, the application lets the user report the accuracy via the app. For this, the user is asked to initiate the reporting of the accuracy, when they arrive at their parked car. The accuracy is then automatically determined by calculating the distance between the user's current location and the location the application determined as parking location.
 
 
 \begin{table}[h!]
@@ -68,49 +65,44 @@ To evaluate the accuracy of the determined parking position, users are asked to 
 
 
 
-For the evaluation, 13 data points are collected by 4 people. The results can be seen in table \ref{table:acc_eval}. The mean accuracy is 112.7 meters. The standard deviation is 81.78. The best measured accuracy is 13.7 meters, the worst measured accuracy is 232.7 meters.
-
+For the evaluation, 13 data points are collected by four people. The results can be seen in Table \ref{table:acc_eval}. The mean accuracy is 112.7 meters. The standard deviation is 85.12. The best measured accuracy is 13.7 meters, the worst measured accuracy is 232.7 meters. 46.2\% of the data sets have an accuracy of 50 meters or better.
 
 \section{Fulfillment of Requirements}
-The third section, \textit{Fulfillment of Requirements}, evaluated the fulfillment of the defined requirements. First, the fulfilment of the individual requirements are discussed. Second, the overall fulfillment of the requirements is presented. 
 
-\paragraph{[RF.01] The application determines the parking position of the users car using spatial analysis}
-The requirement is fulfilled. The application logs the users trajectory, classifies the transportation mode of each floating window segment within a trip in the trajectory and heuristically determines the parking position of the car based on the classified transportation mode
+\paragraph{[RF.01] The application determines the parking position of the user's car using spatial trajectory analysis}
+The requirement is fulfilled. The application logs the user's trajectory, classifies the transportation mode of each moving window segment within each trip of the trajectory and heuristically determines the parking position of the car based on the classified transportation mode
 
-\paragraph{[RF.02] The application presents the determined parking position of the users car on a map}
-This requirement is fulfilled. When the application has determined the parking position of the users car, the determined location is shown on a map view.
+\paragraph{[RF.02] The application presents the determined parking position of the user's car on a map}
+This requirement is fulfilled. When the application has determined the parking position of the user's car, the determined location is shown on a map view.
 
 \paragraph{[RF.03] The application presents the current position of the user on a map}
-This requirement is fulfilled. The application shows the location of the user when the application is started and also when the parking position of the user is determined.
+This requirement is fulfilled. The application shows the location of the user when the application is started and also when the parking position of the user's car is determined.
 
 \paragraph{[RF.04] The application presents detailed information about the determined parking position, namely the address, the distance from the current location and the relative altitude}
-This requirement is fulfilled. When the application has determined the parking position of the users car, the ''MapView - Parking Position Determined'' is shown, which presents detailed information of the determined parking position, such as the address, the relative distance and altitude from the users location to the parked car and if the information is available also the floor the car is parked in.
+This requirement is fulfilled. When the application has determined the parking position of the user's car, the ''MapView - Parking Position Determined'' is shown, which presents detailed information of the determined parking position, such as the address, the relative distance and altitude from the user's location to the parked car and, if the information is available, the floor the car is parked on.
 
-\paragraph{[RF.05] The applications enables the user to report the accuracy of the determined parking position to the developer}
+\paragraph{[RF.05] The application enables the user to report the accuracy of the determined parking position to the developer}
 This requirement is fulfilled. The application offers the user the option to report the accuracy of the determined parking position. The user can initiate this process by clicking on the button labelled ''Report Accuracy'' on the ''MapView - Parking Position Determined'' view.
-
 
 \paragraph{[RN.01] The application is easy to use}
 This requirement is fulfilled. The design process of the user interface is user-centric. Each of the four user interface iterations is tested with new potential users for obstacles and irritations. This process results in an easy to use user interface.
 
 \paragraph{[RN.02] The application does not send any location data to server components of the implemented system}
-This requirement is fulfilled. The application has only one server connection which is used to report the accuracy of the application. In this report, no location data is send. Only the relative distance between the users location and the determined parking position and other meta data is sent. No concrete location can be determined based on this data.
+This requirement is fulfilled. The application has only one server connection which is used to report the accuracy of the application. In this report, no location data is sent. Only the relative distance between the user's location and the determined parking position and other meta data is sent. No concrete location can be determined based on this data.
 
 \paragraph{[RN.03] The application does not rely on manual user input for determining the parking position}
-This requirement is fulfilled. The application automatically determines the parking position of the users car without any manual input of the user. The determination is based on the users trajectory, which is automatically logged by the application. The user does not need to give any manual input to enable the system to successfully determine the parking position of the users car. 
+This requirement is fulfilled. The application automatically determines the parking position of the user's car without any manual input of the user. The determination is based on the user's trajectory which is automatically logged by the application. The user does not need to give any manual input to enable the system to successfully determine the parking position of the user's car. 
 
 \paragraph{[RN.04] The accuracy of the determined parking position is better than 50 meters}
-This requirement is not fulfilled. The mean accuracy is 112.7 meters and thus less accurate than 50 meters. 
+This requirement is fulfilled to 46.2\%, as 46.2\% of the tests show an accuracy of 50 meters or better.
 
 \paragraph{[RN.05] The application is developed to run on iOS 13}
 This requirement is fulfilled. The application can successfully run on the operating system iOS 13.
 
-\paragraph{[RN.07] The application is functional on big parking lots}
-This requirement is partly fulfilled. The application can determine the parking position of a users car and thus supports the user in finding their car on a big parking lot. As the accuracy is not as good as expected, the application can only give a rough estimation where the car is parked and thus is not fully functional in this scenario.
+\paragraph{[RN.06] The application is functional on big parking lots}
+This requirement is partly fulfilled. The application can determine the parking position of a user's car in 42.6\% of the cases accurately and thus can fully support the user in finding their car in a big parking lot in these cases. 
 
-\paragraph{[RN.08] The application is functional on multi-storey parking lots}
-This requirement is fulfilled. If the parking position is determined, the application shows the relative altitude of the parked car and also the floor of the parked car, if the information is available. Thus, the application can support a user to find their parked car in a multi-storey parking lot.
+\paragraph{[RN.07] The application is functional on multi-storey parking lots}
+This requirement is fulfilled. If the parking position is determined, the application shows the relative altitude of the parked car and also the floor of the parked car, if the information is available. Therefore, the application can support a user to find their parked car in a multi-storey parking lot.
 
-The application fulfills 11.5 of the 13 defined requirements. 
-
-
+The application fulfills ten of the twelve requirements fully and two of the requirements partly. Thus, the requirements are reached to 91.6\%. 

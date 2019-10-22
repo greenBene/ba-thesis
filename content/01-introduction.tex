@@ -1,42 +1,40 @@
 \chapter{Introduction}
 
 The first chapter, \textit{Introduction}, introduces the domain of parking spaces, explains why it is useful to find a parked car in a short period of time and summarises the contribution of this Bachelor thesis for finding a parked car based on trajectory analysis.
-The first section, \textit{Motivation}, explains the problem of overused parking spaces in major cities. It shows why it can be difficult to find a parked car and how the period of time a driver needs to find their parked car affects the number of unoccupied parking spaces.
-The second section, \textit{Outline of Contribution}, summarises the contribution of the Bachelor thesis and the functionality of the developed application, which supports the drivers in finding their parked car. 
-The third section, \textit{Structure of Thesis}, describes the structure of the Bachelor thesis.
+The first section, \textit{Motivation}, outlines the problem of overused parking spaces in major cities. It shows why it can be difficult to find a parked car and how the period of time a driver needs to find their parked car affects the number of unoccupied parking spaces.
+The second section, \textit{Outline of Contribution}, presents the main features of the developed mobile application to support users in finding their parked car and the designed algorithm to determine the parking position of the user's car based on trajectory analysis. 
+The third section, \textit{Structure of Thesis}, summarised the content of each chapter of this Bachelor thesis.
+
 
 \section{Motivation}
 % introduce the domain
-The first section, \textit{Motivation}, explains the problem of overused parking spaces in major cities. It shows why it can be difficult to find a parked car and how the period of time a driver needs to find their parked car affects the number of unoccupied parking spaces.
-
-Finding an unoccupied parking space in a major city is becoming more difficult as the number of private vehicles increases and the available land for parking spaces is not efficiently used. It is estimated that 30\% of driving vehicles in cities are searching for a parking space. A decrease in parking time would lead to more available parking spaces, as the parking spaces would be less in unnecessary use and thus would be earlier available again. \cite{wu2007robust} \cite{Ibrahim2018} \cite{Geng2012}
+Finding an unoccupied parking space in a major city is becoming more difficult as the number of private vehicles increases and the available land for parking spaces is not efficiently used. It is estimated that 30\% of driving vehicles in cities are searching for a parking space. A decrease in parking time leads to more available parking spaces. \cite{wu2007robust}\cite{Ibrahim2018}\cite{Geng2012}
 
 % introduce the problem 
-Drivers are more conscious about the appointment they are heading to than the exact location where they park. The frustration caused by the difficulty to find an unoccupied parking space increases this effect. Hence, it can be time-consuming to find the position where the car is parked after the appointment. Parking spaces are longer occupied than necessary.
+Drivers are more focused on the appointment they are heading to than the exact location where they park. The frustration caused by the difficulty to find an unoccupied parking space increases this lack of attention to the parking position. Hence, it can be time-consuming to find the position where the car is parked after the appointment. Parking spaces are longer occupied than necessary.
   
 % give an easy example
 \textit{\textbf{Example 1}
-Alexandra Smith has been invited for a job interview at Boho Technologies in London. The public transport in the village she lives in is not optimal, so she decides to go to the interview by car. Half an hour before the appointment she is at the company and is looking for a parking space. After 10 minutes she finds one in a small side street. She parks there and makes it just in time to the job interview. After the successful appointment, she cannot remember where her car is parked. She needs more than 30 minutes to find it. When she finds it, she notices an 80£ fine on her car because she stayed longer than allowed on the parking space.
+Alexandra Smith has been invited for a job interview at Boho Technologies in London. The public transport in the village she lives in is not performing well. She decides to go to the interview by car. Half an hour before the appointment takes place, she is at the company and is looking for a parking space. After ten minutes she finds one in a small side street. She parks there and makes it just in time to the job interview. After the successful appointment, she cannot remember where her car is parked. She needs more than 30 minutes to find it. When she finds it, she notices an 80£ fine on her car because she stayed longer than allowed in the parking space.
 }
 
-As \textit{Example 1} shows that it is challenging to find a parked car in a major city. This leads to frustrated drivers and the parking spaces are longer occupied than necessary. A system to support the drivers at finding their cars is needed to help reducing the unnecessary utilisation of highly needed parking spaces in major cities.
+\textit{Example 1} presents the challenge of finding a parked car in a major city. Parking spaces are longer occupied than necessary. A system to support the drivers in finding their cars is needed to help reducing the unnecessary utilisation of highly needed parking spaces in major cities.
 
 \section{Outline of Contribution}
-The second section, \textit{Outline of Contribution}, summarises the contribution of the Bachelor thesis and the functionality of the developed application, which supports the drivers in finding their parked car. 
-
 % Artefact
-In the Bachelor thesis an iPhone\footnote{iPhone: \url{https://www.apple.com/iphone/}, (last accessed October 15, 2019)} application is developed, which supports drivers of cars to locate their parked car. The application uses spatial trajectories, based on the Global Positioning System (GPS), to model each trip of the driver to determine the parking position of the car. The application shows the location of the parked car and the location of the user on a map. All calculations involving the spatial trajectories of the users are done on the mobile device to ensure privacy.
+As part of this Bachelor thesis an iPhone\footnote{iPhone: \url{https://www.apple.com/iphone/}, (online: last accessed October 19, 2019)} application is developed that supports drivers of cars to locate their parked car. The application uses spatial trajectories, based on the Global Positioning System Standard Positioning Service, to model each trip of the driver to determine the parking position of the car. The application shows the location of the parked car and the location of the user on a map. All calculations involving the spatial trajectory of the user are computed on the mobile device itself to ensure privacy.
 
 % Method
-To enable the application to determine the parking position of a car, an algorithm is developed to determine the parking position of the users car based on the users spatial trajectory. The spatial trajectory of the user is split into trips based on the stay points of the trajectory. Based on the transportation mode of the user on a trip segment, the parking position of their car is determined. The transportation mode is classified using a machine learning model. 
+To enable the application to determine the parking position of a car, an algorithm is developed to determine the parking position of the user's car based on the user's spatial trajectory. The spatial trajectory of the user is split into trips. Based on the transportation mode of the user in a trip segment, the parking position of their car is determined. The transportation mode is classified using a machine learning model. 
 
 \section{Structure of Thesis}
-The third section, \textit{Structure of Thesis}, describes the structure of the Bachelor thesis by introducing each chapter with its function in the thesis.
 
-Chapter two, \textit{Background}, defines terms necessary to understand the Bachelor thesis, explains the used methodology for analysing the problem and discusses related systems and related academic works.
-In the third chapter, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of potential users for an application that determines the parking position of a car. Based on the results of the interviews and the constraints of the Bachelor thesis, requirements are defined for the application.
-The fourth chapter, \textit{Design}, presents the results of the user interface design, the created algorithm to determine the parking position of a users car and the used machine learning workflow.
+Chapter two, \textit{Background}, defines terms necessary to understand this Bachelor thesis, explains the methodology applied for analysing the problem and discusses related systems as well as related academic work.
+In the third chapter, \textit{Analysis}, background interviews are conducted to identify the needs and expectations of users for an application that determines the parking position of a car. Based on the results of the interviews and the constraints of this Bachelor thesis, requirements are defined for the application.
+The fourth chapter, \textit{Design}, presents the results of the user interface design, the created algorithm to determine the parking position of a user's car and the used machine learning workflow.
 The fifth chapter, \textit{Implementation}, describes the implementation of the training of the machine learning model used for classifying the transportation of the user and the implementation of the developed application. 
-The sixth chapter, \textit{Evaluation}, evaluates the results of the Bachelor thesis.
-The seventh chapter, \textit{Results}, presents the outcome of the Bachelor thesis.
-The eight chapter, \textit{Conclusion}, discusses the results of the Bachelor thesis and potential future work based on the Bachelor thesis.
+The sixth chapter, \textit{Evaluation}, evaluates the results of this Bachelor thesis.
+The seventh chapter, \textit{Results}, summarises the outcome of this Bachelor thesis and presents its limitations. 
+The eight chapter, \textit{Conclusion}, discusses the results of this Bachelor thesis and potential future work.
+The ninth chapter, \textit{References}, lists all used external sources. 
+Appendix A, \textit{User Interface Iterations}, presents all views of the four iterations of the user interface design.
